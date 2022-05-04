@@ -209,8 +209,7 @@ const Navbar = () => {
         <SlickBar clicked={click}>
           <Item
             onClick={() => setClick(false)}
-            exact
-            activeClassName="active"
+            end={+true}
             to="/"
           >
             <img src={Home} alt="Home" />
@@ -218,7 +217,6 @@ const Navbar = () => {
           </Item>
           <Item
             onClick={() => setClick(false)}
-            activeClassName="active"
             to="/team"
           >
             <img src={Team} alt="Team" />
@@ -226,7 +224,6 @@ const Navbar = () => {
           </Item>
           <Item
             onClick={() => setClick(false)}
-            activeClassName="active"
             to="/calender"
           >
             <img src={Calender} alt="Calender" />
@@ -234,7 +231,6 @@ const Navbar = () => {
           </Item>
           <Item
             onClick={() => setClick(false)}
-            activeClassName="active"
             to="/documents"
           >
             <img src={Documents} alt="Documents" />
@@ -242,7 +238,6 @@ const Navbar = () => {
           </Item>
           <Item
             onClick={() => setClick(false)}
-            activeClassName="active"
             to="/projects"
           >
             <img src={Projects} alt="Projects" />

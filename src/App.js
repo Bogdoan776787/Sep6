@@ -1,4 +1,4 @@
-import { Route, Switch, useLocation } from "react-router";
+import { Route, Routes } from "react-router";
 import Navbar from "./Navigation/Navbar";
 import Home from "./Pages/Home";
 import Team from "./Pages/Team";
@@ -23,19 +23,18 @@ const Pages = styled.div`
 `;
 
 function App() {
-  const location = useLocation();
   return (
     <>
       <Navbar />
       <Pages>
         <AnimatePresence exitBeforeEnter>
-          <Switch location={location} key={location.pathname}>
-            <Route exact path="/" component={Home} />
-            <Route path="/team" component={Team} />
-            <Route path="/calender" component={Calender} />
-            <Route path="/documents" component={Documents} />
-            <Route path="/projects" component={Projects} />
-          </Switch>
+          <Routes>
+            <Route path="/" element={<Home/>} />
+            <Route path="/team" element={<Team/>} />
+            <Route path="/calender" element={<Calender/>} />
+            <Route path="/documents" element={<Documents/>} />
+            <Route path="/projects" element={<Projects/>} />
+          </Routes>
         </AnimatePresence>
       </Pages>
     </>
