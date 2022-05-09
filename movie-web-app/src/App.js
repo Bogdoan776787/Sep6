@@ -5,6 +5,7 @@ import Team from "./Pages/Team";
 import Calender from "./Pages/Calender";
 import Documents from "./Pages/Documents";
 import Projects from "./Pages/Projects";
+import Login from "./Pages/Authenthicate/Login"
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
 
@@ -34,6 +35,8 @@ function App() {
             <Route path="/calender" element={<Calender/>} />
             <Route path="/documents" element={<Documents/>} />
             <Route path="/projects" element={<Projects/>} />
+            <Route path="/login" element={<Login/>} />
+
           </Routes>
         </AnimatePresence>
       </Pages>
