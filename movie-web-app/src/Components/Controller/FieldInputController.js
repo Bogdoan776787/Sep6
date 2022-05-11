@@ -15,9 +15,13 @@ const FieldInputController = (props) => {
         id={props.id} 
         label={props.label}
         variant={props.variant}
-        type = {props.type}        
+        type = {props.type}     
+        error={props.error? true:false}
+        {...props.value}
+        
         />
   }
+  defaultValue=""
 />;
 };
 

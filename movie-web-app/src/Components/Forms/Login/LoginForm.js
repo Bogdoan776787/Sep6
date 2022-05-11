@@ -1,10 +1,11 @@
-import { Controller, useForm } from "react-hook-form";
-import { Form, LoginText,SubmitButton,LoginRedirectLink, InputWrapper,LoginErrorMessage } from "./LoginFormStyled";
-import FieldInputController from "../Controller/FieldInputController";
+import { useForm } from "react-hook-form";
+import { Form, LoginHeaderText,LoginRedirectLink,LoginErrorMessage } from "./LoginFormStyled";
+import {SubmitButton,InputWrapper} from "../FormStyled"
+import FieldInputController from "../../Controller/FieldInputController";
 import {Typography} from "@mui/material"
 
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const { handleSubmit, formState: { errors }, control } = useForm(
     {
       defaultValues:
@@ -14,12 +15,14 @@ const LoginForm = () => {
       }
     }
   );
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => {
+    props.handleSubmit(data.email,data.password);
+  }
 
   return <Form onSubmit={handleSubmit(onSubmit)}>
-    <LoginText >
+    <LoginHeaderText >
       Login
-    </LoginText>
+    </LoginHeaderText>
     <InputWrapper>
     <FieldInputController
       name="email"
