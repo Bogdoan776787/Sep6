@@ -1,6 +1,6 @@
 {
   "auth": {
-    "moviewebapp8b55887a": {
+    "moviewebappa0fbe746": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],

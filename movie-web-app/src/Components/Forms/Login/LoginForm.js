@@ -1,22 +1,27 @@
-import { useForm } from "react-hook-form";
-import { Form, LoginHeaderText,LoginRedirectLink,LoginErrorMessage } from "./LoginFormStyled";
-import {SubmitButton,InputWrapper} from "../FormStyled"
+import { Form, LoginHeaderText, LoginRedirectLink, LoginErrorMessage } from "./LoginFormStyled";
+import { SubmitButton, InputWrapper } from "../FormStyled"
 import FieldInputController from "../../Controller/FieldInputController";
-import {Typography} from "@mui/material"
+import { Typography } from "@mui/material"
+
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
+
+const schema = yup.object({
+  username: yup.string().required("Invalid Username or password"),
+  password: yup.string().required("Invalid Username or Password")
+}).required();
 
 
 const LoginForm = (props) => {
-  const { handleSubmit, formState: { errors }, control } = useForm(
+  const { register,handleSubmit, formState: { errors }, control } = useForm(
     {
-      defaultValues:
-      {
-        email: "",
-        password: ""
-      }
+      resolver: yupResolver(schema)
     }
   );
   const onSubmit = data => {
-    props.handleSubmit(data.email,data.password);
+    props.handleSubmit(data.username, data.password);
   }
 
   return <Form onSubmit={handleSubmit(onSubmit)}>
@@ -24,15 +29,18 @@ const LoginForm = (props) => {
       Login
     </LoginHeaderText>
     <InputWrapper>
-    <FieldInputController
-      name="email"
-      control={control}
-      rules={{ required: true }}
-      id="outlined-basic"
-      label="Email"
-      variant="outlined"
-      type="input"
-    />
+      <FieldInputController
+        name="username"
+        control={control}
+        rules={{ required: true }}
+        id="outlined-basic"
+        label="Username"
+        variant="outlined"
+        type="input"
+        error={errors?.username}
+        value={register('username')}
+
+      />
     </InputWrapper>
     <FieldInputController
       name="password"
@@ -42,12 +50,15 @@ const LoginForm = (props) => {
       label="Password"
       variant="outlined"
       type="password"
+      error={errors.password}
+      value={register('password')}
+
     />
-    <LoginErrorMessage>Wrong Email or Password</LoginErrorMessage>
-    
-    <SubmitButton type="submit"/>
+    <LoginErrorMessage>{errors.username?.message || errors.password?.message  || props.error}</LoginErrorMessage>
+
+    <SubmitButton type="submit" />
     <Typography>
-      Don't have an account? 
+      Don't have an account?
       <LoginRedirectLink to="/register">SignUp</LoginRedirectLink>
     </Typography>
 
