@@ -6,8 +6,11 @@ import Calender from "./Pages/Calender";
 import Documents from "./Pages/Documents";
 import Projects from "./Pages/Projects";
 import Login from "./Pages/Authenthicate/Login"
+import Register from "./Pages/Authenthicate/Register"
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
+
+
 
 const Pages = styled.div`
   width: 100vw;
@@ -36,6 +39,8 @@ function App() {
             <Route path="/documents" element={<Documents/>} />
             <Route path="/projects" element={<Projects/>} />
             <Route path="/login" element={<Login/>} />
+            <Route path="/register" element={<Register/>} />
+
 
           </Routes>
         </AnimatePresence>

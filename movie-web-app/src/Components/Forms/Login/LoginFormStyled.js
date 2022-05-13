@@ -12,7 +12,7 @@ export const Form = styled.form`
     padding-top:20px;
 `
 
-export const LoginText = styled.h1 `
+export const LoginHeaderText = styled.h1 `
 width:fit-content;
 margin:0 0 30px 0;
 padding:0;
@@ -24,23 +24,6 @@ export const LoginRedirectLink = styled(NavLink)`
     margin-left:10px;
 `
 
-export const SubmitButton = styled.input`
-    width:150px;
-    height:30px;
-    margin-top:20px;
-    margin-bottom:20px;
-    border-radius:15px;
-    background-color:var(--background);
-    border:none;
-    &:hover{
-        background-color:white;
-        border:3px solid var(--background)
-    }
-    `
-
-export const InputWrapper = styled.div`
-margin-bottom:30px
-`
 
 export const LoginErrorMessage = styled.h5`
   color:red;
