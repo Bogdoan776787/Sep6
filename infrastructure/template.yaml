@@ -1,0 +1,69 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  infrastructure
+
+  Sample SAM Template for infrastructure
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: triggers/set_user/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /user
+            Method: get
+
+
+
+  #DynamoDB    
+  UsersTable:      
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: "Users"
+      PrimaryKey: 
+        Name: "UserId"
+        Type: "String"
+
+  CommentsTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: "Comments"
+      PrimaryKey: 
+        Name: "CommentId"
+        Type: "String"
+
+  ReviewsTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: "Reviews"
+      PrimaryKey: 
+        Name: "ReviewId"
+        Type: "String"
+
+  WatchListTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: "WatchList"
+      PrimaryKey: 
+        Name: "listId"
+        Type: "String"
+
+
+
+Outputs:
+  HelloWorldApi:
+    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/prod/v1/"
+
