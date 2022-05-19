@@ -10,6 +10,8 @@ import Documents from "../assets/draft.svg";
 import PowerOff from "../assets/power-off-solid.svg";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { useSelector } from 'react-redux'
+
 
 const Container = styled.div`
   position: fixed;
@@ -191,6 +193,7 @@ const Logout = styled.button`
 `;
 
 const Navbar = () => {
+  let user = useSelector(state=>state.user)
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
@@ -244,7 +247,7 @@ const Navbar = () => {
             <Text clicked={click}>Projects</Text>
           </Item>
         </SlickBar>
-
+        { user.data &&
         <Profile clicked={profileClick}>
           <img
             onClick={() => handleProfileClick()}
@@ -262,6 +265,7 @@ const Navbar = () => {
             </Logout>
           </Details>
         </Profile>
+        }
       </SidebarContainer>
     </Container>
   );

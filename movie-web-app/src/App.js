@@ -9,6 +9,10 @@ import Login from "./Pages/Authenthicate/Login"
 import Register from "./Pages/Authenthicate/Register"
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
+import { useSelector } from 'react-redux'
+import PrivateRoute from "./Routes/PrivateRoute";
+import PublicRoute from "./Routes/PublicRoute";
 
 
 
@@ -27,6 +31,7 @@ const Pages = styled.div`
 `;
 
 function App() {
+  let user = useSelector(state=>state.user)
   return (
     <>
       <Navbar />
@@ -37,9 +42,12 @@ function App() {
             <Route path="/team" element={<Team/>} />
             <Route path="/calender" element={<Calender/>} />
             <Route path="/documents" element={<Documents/>} />
-            <Route path="/projects" element={<Projects/>} />
-            <Route path="/login" element={<Login/>} />
-            <Route path="/register" element={<Register/>} />
+            <Route path="/projects" element={<PrivateRoute><Projects/></PrivateRoute>} />
+
+             <Route path="/login" element={
+              <PublicRoute><Login/></PublicRoute>
+            } />
+            <Route path="/register" element={<PublicRoute><Register/></PublicRoute>} />
 
 
           </Routes>
