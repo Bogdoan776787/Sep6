@@ -14,12 +14,15 @@ import PublicRoute from "./Routes/PublicRoute";
 
 
 
+import "swiper/swiper.min.css";
+import "swiper/swiper-bundle.min.css";
+import "./App.scss";
 const Pages = styled.div`
   width: 100vw;
   height: 100vh;
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   h1 {
     font-size: calc(2rem + 2vw);
     background: linear-gradient(to right, #803bec 30%, #1b1b1b 100%);
