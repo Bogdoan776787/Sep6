@@ -26,13 +26,9 @@
     "react-scripts": "5.0.1",
     "sass": "^1.52.0",
     "styled-components": "^5.3.5",
-<<<<<<< HEAD
-    "web-vitals": "^2.1.4",
-    "yup": "^0.32.11"
-=======
+    "yup": "^0.32.11",
     "swiper": "^6.4.8",
     "web-vitals": "^2.1.4"
->>>>>>> 5ac5aca49264a208322d593e6ec5bd9133f99e7b
   },
   "scripts": {
     "start": "react-scripts start",
