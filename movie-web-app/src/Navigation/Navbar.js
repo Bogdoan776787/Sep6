@@ -10,7 +10,7 @@ import Documents from "../assets/draft.svg";
 import PowerOff from "../assets/power-off-solid.svg";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 
 
 const Container = styled.div`

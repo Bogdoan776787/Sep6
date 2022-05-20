@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Typography } from "@mui/material";
+
 
 export const Form = styled.form`
     width:550px;
@@ -13,8 +15,23 @@ export const Form = styled.form`
 
 export const ConfirmCodeHeaderTExt = styled.h1`
 width:fit-content;
-margin:0 0 30px 0;
+margin:0 0 10px 0;
 padding:0;
 font-size:16px;
+`
+
+export const ConfirmCodeHelperText = styled(Typography)`
+width:420px;
+font-weight:normal;
+margin-bottom:20px!important;
+
+`
+
+export const ResendCodeText = styled(Typography)
+`
+text-align:right;
+color: blue;
+text-decoration:underline;
+margin-top:10px
 `
 

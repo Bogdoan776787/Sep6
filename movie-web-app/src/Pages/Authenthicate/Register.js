@@ -39,13 +39,15 @@ const Register = () => {
         
         setCodeError("Invalid code")
     }
-
+  }
+  const resendCode = async () => {
+      await Auth.resendSignUp(userName)
   }
 
 
   return <AuthenthicateBackground>
     {registrationStep == "signUp" && <RegisterForm handleSubmit={signUp} error={userNameError}></RegisterForm>}
-    {registrationStep == "confirmationCode" && <ConfirmCodeForm handleSubmit={confirmCode} error={codeError}></ConfirmCodeForm>}
+    {registrationStep == "confirmationCode" && <ConfirmCodeForm handleSubmit={confirmCode} error={codeError} resendCode = {resendCode}></ConfirmCodeForm>}
   </AuthenthicateBackground>;
 };
 
