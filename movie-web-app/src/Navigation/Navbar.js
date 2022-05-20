@@ -13,6 +13,7 @@ import { NavLink } from "react-router-dom";
 
 const Container = styled.div`
   position: fixed;
+  z-index: 10;
   .active {
     border-right: 4px solid var(--white);
     img {
@@ -54,7 +55,10 @@ const Button = styled.button`
 `;
 
 const SidebarContainer = styled.div`
-  background-color: var(--black);
+  background-color: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(61, 61, 63, 0.37);
+  backdrop-filter: blur(7.5px);
+  -webkit-backdrop-filter: blur(7.5px);
   width: 3.5rem;
   height: 80vh;
   margin-top: 1rem;
@@ -81,7 +85,10 @@ const SlickBar = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--black);
+  background-color: rgba(0, 0, 0, 0.75);
+  box-shadow: 0 8px 32px 0 rgba(61, 61, 63, 0.37);
+  backdrop-filter: blur(7.5px);
+  -webkit-backdrop-filter: blur(7.5px);
   padding: 2rem 0;
   position: absolute;
   top: 6rem;
@@ -131,11 +138,14 @@ const Profile = styled.div`
   align-items: center;
   justify-content: center;
   margin-left: ${(props) => (props.clicked ? "9rem" : "0")};
-  background-color: var(--black);
+  background-color: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(61, 61, 63, 0.37);
+  backdrop-filter: blur(7.5px);
+  -webkit-backdrop-filter: blur(7.5px);
   color: var(--white);
   transition: all 0.3s ease;
   img {
-    width: 2.5rem;
+    width: 3rem;
     height: 2.5rem;
     border-radius: 50%;
     cursor: pointer;
@@ -207,39 +217,23 @@ const Navbar = () => {
           <img src={logo} alt="logo" />
         </Logo>
         <SlickBar clicked={click}>
-          <Item
-            onClick={() => setClick(false)}
-            end={+true}
-            to="/"
-          >
+          <Item onClick={() => setClick(false)} end={+true} to="/">
             <img src={Home} alt="Home" />
             <Text clicked={click}>Home</Text>
           </Item>
-          <Item
-            onClick={() => setClick(false)}
-            to="/team"
-          >
+          <Item onClick={() => setClick(false)} to="/team">
             <img src={Team} alt="Team" />
             <Text clicked={click}>Team</Text>
           </Item>
-          <Item
-            onClick={() => setClick(false)}
-            to="/calender"
-          >
+          <Item onClick={() => setClick(false)} to="/calender">
             <img src={Calender} alt="Calender" />
             <Text clicked={click}>Calender</Text>
           </Item>
-          <Item
-            onClick={() => setClick(false)}
-            to="/documents"
-          >
+          <Item onClick={() => setClick(false)} to="/documents">
             <img src={Documents} alt="Documents" />
             <Text clicked={click}>Documents</Text>
           </Item>
-          <Item
-            onClick={() => setClick(false)}
-            to="/projects"
-          >
+          <Item onClick={() => setClick(false)} to="/projects">
             <img src={Projects} alt="Projects" />
             <Text clicked={click}>Projects</Text>
           </Item>
