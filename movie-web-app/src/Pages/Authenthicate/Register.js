@@ -6,11 +6,13 @@ import ConfirmCodeForm from "../../Components/Forms/Register/ConfirmCode/Confirm
 // import { yupResolver } from "@hookform/resolvers/yup";
 // import * as yup from "yup";
 import { Auth } from "aws-amplify"
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 
 const Register = () => {
+  let navigate = useNavigate();
+
   const [registrationStep, setRegistrationStep] = useState("signUp");
   const [userName, setUsername] = useState("")
   const [codeError, setCodeError] = useState("")
@@ -18,10 +20,10 @@ const Register = () => {
 
   const signUp = async (username, email, password) => {
     try {
+      await Auth.signUp({ username, password, attributes: { email } })
       setUsername(username);
-      const res = await Auth.signUp({ username, password, attributes: { email } })
-      console.log(res)
       setRegistrationStep("confirmationCode")
+
     }
     catch (error) {
         setUserNameError("Username Already exists")
@@ -29,20 +31,23 @@ const Register = () => {
   }
   const confirmCode = async (code) => {
     try {
-      const res = await Auth.confirmSignUp(userName, code)
-      console.log(res)
+      await Auth.confirmSignUp(userName, code)
       setRegistrationStep("signUp")
-      Navigate("/")
+      navigate("/login")
+
     } catch (error) {
+        
         setCodeError("Invalid code")
     }
-
+  }
+  const resendCode = async () => {
+      await Auth.resendSignUp(userName)
   }
 
 
   return <AuthenthicateBackground>
     {registrationStep == "signUp" && <RegisterForm handleSubmit={signUp} error={userNameError}></RegisterForm>}
-    {registrationStep == "confirmationCode" && <ConfirmCodeForm handleSubmit={confirmCode} error={codeError}></ConfirmCodeForm>}
+    {registrationStep == "confirmationCode" && <ConfirmCodeForm handleSubmit={confirmCode} error={codeError} resendCode = {resendCode}></ConfirmCodeForm>}
   </AuthenthicateBackground>;
 };
 

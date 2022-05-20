@@ -4,11 +4,13 @@ import Home from "./Pages/Home";
 import Team from "./Pages/Team";
 import Calender from "./Pages/Calender";
 import Documents from "./Pages/Documents";
-import Projects from "./Pages/Projects";
+import WatchList from "./Pages/WatchList";
 import Login from "./Pages/Authenthicate/Login"
 import Register from "./Pages/Authenthicate/Register"
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
+import PrivateRoute from "./Routes/PrivateRoute";
+import PublicRoute from "./Routes/PublicRoute";
 
 
 
@@ -37,9 +39,12 @@ function App() {
             <Route path="/team" element={<Team/>} />
             <Route path="/calender" element={<Calender/>} />
             <Route path="/documents" element={<Documents/>} />
-            <Route path="/projects" element={<Projects/>} />
-            <Route path="/login" element={<Login/>} />
-            <Route path="/register" element={<Register/>} />
+            <Route path="/watch-list" element={<PrivateRoute><WatchList/></PrivateRoute>} />
+
+             <Route path="/login" element={
+              <PublicRoute><Login/></PublicRoute>
+            } />
+            <Route path="/register" element={<PublicRoute><Register/></PublicRoute>} />
 
 
           </Routes>

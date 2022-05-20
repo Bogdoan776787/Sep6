@@ -10,6 +10,8 @@ import Documents from "../assets/draft.svg";
 import PowerOff from "../assets/power-off-solid.svg";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { useSelector } from 'react-redux'
+
 
 const Container = styled.div`
   position: fixed;
@@ -191,6 +193,7 @@ const Logout = styled.button`
 `;
 
 const Navbar = () => {
+  let user = useSelector(state => state.user)
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
@@ -236,32 +239,34 @@ const Navbar = () => {
             <img src={Documents} alt="Documents" />
             <Text clicked={click}>Documents</Text>
           </Item>
-          <Item
+          {user.data && <Item
             onClick={() => setClick(false)}
-            to="/projects"
+            to="/watch-list"
           >
-            <img src={Projects} alt="Projects" />
-            <Text clicked={click}>Projects</Text>
+            <img src={Projects} alt="WatchList" />
+            <Text clicked={click}>Watch List</Text>
           </Item>
+          }
         </SlickBar>
+        {user.data &&
+          <Profile clicked={profileClick}>
+            <img
+              onClick={() => handleProfileClick()}
+              src="https://picsum.photos/200"
+              alt="Profile"
+            />
+            <Details clicked={profileClick}>
+              <Name>
+                <h4>Jhon&nbsp;Doe</h4>
+                <a href="/#">view&nbsp;profile</a>
+              </Name>
 
-        <Profile clicked={profileClick}>
-          <img
-            onClick={() => handleProfileClick()}
-            src="https://picsum.photos/200"
-            alt="Profile"
-          />
-          <Details clicked={profileClick}>
-            <Name>
-              <h4>Jhon&nbsp;Doe</h4>
-              <a href="/#">view&nbsp;profile</a>
-            </Name>
-
-            <Logout>
-              <img src={PowerOff} alt="logout" />
-            </Logout>
-          </Details>
-        </Profile>
+              <Logout>
+                <img src={PowerOff} alt="logout" />
+              </Logout>
+            </Details>
+          </Profile>
+        }
       </SidebarContainer>
     </Container>
   );

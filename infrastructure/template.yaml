@@ -1,0 +1,177 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  infrastructure
+
+  Sample SAM Template for infrastructure
+
+Globals:
+  Function:
+    Timeout: 10
+    Handler: app.lambda_handler
+    Runtime: python3.9
+    Architectures:
+      - x86_64
+
+Resources:
+  #API declaration
+  Api:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: api
+      StageName: v1
+      Cors:
+        AllowMethods: "'*'"
+        AllowHeaders: "'*'"
+        AllowOrigin: "'*'"
+
+  #LAMBDA FUNCTIONS 
+  GetCommentsFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: module/get_comments/
+      Events:
+        GetComments:
+          Type: Api
+          Properties:
+            Path: /comments
+            Method: get
+            RestApiId: !Ref Api
+
+  PutCommentFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: module/put_comment/
+      Events:
+        GetComments:
+          Type: Api
+          Properties:
+            Path: /comments
+            Method: put
+            RestApiId: !Ref Api
+
+  DeleteCommentFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: module/delete_comment/
+      Events:
+        GetComments:
+          Type: Api
+          Properties:
+            Path: /comments
+            Method: delete
+            RestApiId: !Ref Api
+
+  GetReviewsFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: module/get_reviews/
+      Events:
+        GetReviews:
+          Type: Api
+          Properties:
+            Path: /reviews
+            Method: get
+            RestApiId: !Ref Api
+
+  PutReviewFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: module/put_review/
+      Events:
+        GetReviews:
+          Type: Api
+          Properties:
+            Path: /reviews
+            Method: put
+            RestApiId: !Ref Api
+
+  DeleteReviewFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: module/delete_review/
+      Events:
+        GetReviews:
+          Type: Api
+          Properties:
+            Path: /reviews
+            Method: delete
+            RestApiId: !Ref Api
+
+  GetWatchListFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: module/get_watch_list/
+      Events:
+        GetReviews:
+          Type: Api
+          Properties:
+            Path: /watch-list
+            Method: get
+            RestApiId: !Ref Api
+
+  PutWatchListFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: module/put_watch_list/
+      Events:
+        GetReviews:
+          Type: Api
+          Properties:
+            Path: /watch-list
+            Method: put
+            RestApiId: !Ref Api
+
+  DeleteWatchListFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: module/delete_watch_list/
+      Events:
+        GetReviews:
+          Type: Api
+          Properties:
+            Path: /watch-list
+            Method: delete
+            RestApiId: !Ref Api
+
+
+  #DynamoDB    
+  UsersTable:      
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: "Users"
+      PrimaryKey: 
+        Name: "UserId"
+        Type: "String"
+
+  CommentsTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: "Comments"
+      PrimaryKey: 
+        Name: "CommentId"
+        Type: "String"
+
+  ReviewsTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: "Reviews"
+      PrimaryKey: 
+        Name: "ReviewId"
+        Type: "String"
+
+  WatchListTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: "WatchList"
+      PrimaryKey: 
+        Name: "listId"
+        Type: "String"
+
+
+
+Outputs:
+  API:
+    Description: "API Gateway endpoint URL for Prod"
+    Value: !Sub "https://${Api}.execute-api.${AWS::Region}.amazonaws.com/prod/v1/"
+

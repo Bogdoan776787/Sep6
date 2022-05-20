@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "moviewebappa0fbe746_identitypool_a0fbe746",
+    "identityPoolName": "moviewebapp46602665_identitypool_46602665",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "moviewa0fbe746",
-    "userPoolName": "moviewebappa0fbe746_userpool_a0fbe746",
+    "resourceNameTruncated": "moview46602665",
+    "userPoolName": "moviewebapp46602665_userpool_46602665",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,12 +31,21 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "moviewa0fbe746_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "moview46602665_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "a0fbe746",
-    "resourceName": "moviewebappa0fbe746",
+    "sharedId": "46602665",
+    "resourceName": "moviewebapp4660266546602665",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "default",
+    "useDefault": "manual",
+    "thirdPartyAuth": false,
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "triggers": {
+      "PostConfirmation": [
+        "custom"
+      ]
+    },
+    "hostedUI": false,
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,

@@ -1,7 +1,7 @@
 import FieldInputController from "../../../Controller/FieldInputController";
 import { InvalidInputText } from "../RegisterFormStyled";
 import {SubmitButton,InputWrapper} from "../../FormStyled"
-import {Form,ConfirmCodeHeaderTExt} from "./ConfirmCodeStyled"
+import {Form,ConfirmCodeHeaderTExt,ResendCodeText,ConfirmCodeHelperText} from "./ConfirmCodeStyled"
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -21,10 +21,16 @@ const ConfirmCodeForm = (props) => {
     props.handleSubmit(data.code);
   };
 
+  const resendCode = () =>
+  {
+    props.resendCode();
+  }
+
   return <Form onSubmit={handleSubmit(onSubmit)}>
     <ConfirmCodeHeaderTExt >
       Confirm Code
     </ConfirmCodeHeaderTExt>
+    <ConfirmCodeHelperText>Please insert Confirmation Code received in the provided email</ConfirmCodeHelperText>
     <InputWrapper>
     <FieldInputController
       name="code"
@@ -38,6 +44,7 @@ const ConfirmCodeForm = (props) => {
       error={errors.code}
     />
     <InvalidInputText>{errors.code?.message || props.error}</InvalidInputText>
+    <ResendCodeText onClick={resendCode}>Resend code</ResendCodeText>
     </InputWrapper>
 
     <SubmitButton type="submit"/>
