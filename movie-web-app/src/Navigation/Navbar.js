@@ -203,7 +203,8 @@ const Logout = styled.button`
 `;
 
 const Navbar = () => {
-  let user = useSelector(state => state.user)
+  let user = useSelector(state=>state.user)
+
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
@@ -243,27 +244,27 @@ const Navbar = () => {
             <img src={Projects} alt="WatchList" />
             <Text clicked={click}>Watch List</Text>
           </Item>
-          }
+} 
         </SlickBar>
         {user.data &&
-          <Profile clicked={profileClick}>
-            <img
-              onClick={() => handleProfileClick()}
-              src="https://picsum.photos/200"
-              alt="Profile"
-            />
-            <Details clicked={profileClick}>
-              <Name>
-                <h4>Jhon&nbsp;Doe</h4>
-                <a href="/#">view&nbsp;profile</a>
-              </Name>
+        <Profile clicked={profileClick}>
+          <img
+            onClick={() => handleProfileClick()}
+            src="https://picsum.photos/200"
+            alt="Profile"
+          />
+          <Details clicked={profileClick}>
+            <Name>
+              <h4>Jhon&nbsp;Doe</h4>
+              <a href="/#">view&nbsp;profile</a>
+            </Name>
 
-              <Logout>
-                <img src={PowerOff} alt="logout" />
-              </Logout>
-            </Details>
-          </Profile>
-        }
+            <Logout>
+              <img src={PowerOff} alt="logout" />
+            </Logout>
+          </Details>
+        </Profile>
+}
       </SidebarContainer>
     </Container>
   );
