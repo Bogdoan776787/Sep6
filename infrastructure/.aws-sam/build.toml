@@ -55,4 +55,31 @@ manifest_hash = ""
 packagetype = "Zip"
 functions = ["PutWatchListFunction"]
 
+[function_build_definitions.5f5d28ce-4e4e-4074-92f7-3cacd467e17e]
+codeuri = "F:\\UNIVERSITY\\SEM6\\Sep6\\infrastructure\\module\\delete_comment"
+runtime = "python3.9"
+architecture = "x86_64"
+handler = "app.lambda_handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["DeleteCommentFunction"]
+
+[function_build_definitions.e2e31382-bae3-4450-a48e-748b111880c1]
+codeuri = "F:\\UNIVERSITY\\SEM6\\Sep6\\infrastructure\\module\\delete_review"
+runtime = "python3.9"
+architecture = "x86_64"
+handler = "app.lambda_handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["DeleteReviewFunction"]
+
+[function_build_definitions.d82e422d-67f0-4f34-b40f-ff9b089104f0]
+codeuri = "F:\\UNIVERSITY\\SEM6\\Sep6\\infrastructure\\module\\delete_watch_list"
+runtime = "python3.9"
+architecture = "x86_64"
+handler = "app.lambda_handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["DeleteWatchListFunction"]
+
 [layer_build_definitions]

@@ -1,14 +1,23 @@
 import json
+import boto3
+from boto3.dynamodb.conditions import Key, Attr
+
+
+db = boto3.resource('dynamodb')
 
 
 
 def lambda_handler(event, context):
+    status_code = 200
+    text_message="SUCCESS"
+    query_params = event["queryStringParameters"]
 
+    table = db.Table("Comments")
+    response = table.scan(
+    FilterExpression=Attr('MovieId').eq(query_params["movieId"])
+    )
 
     return {
-        "statusCode": 200,
-        "body": json.dumps({
-            "message": "Get comments",
-            # "location": ip.text.replace("\n", "")
-        }),
+        "statusCode": status_code,
+        "body": json.dumps(response["Items"]),
     }
