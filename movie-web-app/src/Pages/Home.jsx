@@ -1,9 +1,9 @@
 import MotionHoc from "./MotionHoc";
-import HeroSlide from "../components/hero-slide/HeroSlide";
-import MovieList from "../components/movie-list/MovieList";
+import HeroSlide from "../Components/hero-slide/HeroSlide";
+import MovieList from "../Components/movie-list/MovieList";
 import { Link } from "react-router-dom";
 import { category, movieType, tvType } from "../api/tmdbApi";
-import { OutlineButton } from "../components/button/Button";
+import { OutlineButton } from "../Components/button/Button";
 const HomeComponent = () => {
   return (
     <div>
