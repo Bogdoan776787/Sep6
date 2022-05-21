@@ -1,6 +1,6 @@
 import FieldInputController from "../../Controller/FieldInputController";
 import { Form, RegisterHeaderText, InvalidInputText, RegisterRedirectLink } from "./RegisterFormStyled";
-import { SubmitButton, InputWrapper } from "../FormStyled"
+import { SubmitButton, InputWrapper,TextRedirectHelper } from "../FormStyled"
 import { Typography } from "@mui/material";
 
 import { useForm } from "react-hook-form";
@@ -89,7 +89,7 @@ const RegisterForm = (props) => {
 
     <SubmitButton type="submit" value = "Register"/>
 
-    <Typography>Already Registered? <RegisterRedirectLink to="/login">LogIn</RegisterRedirectLink></Typography>
+    <TextRedirectHelper>Already Registered? <RegisterRedirectLink to="/login">LogIn</RegisterRedirectLink></TextRedirectHelper>
   </Form>;
 };
 

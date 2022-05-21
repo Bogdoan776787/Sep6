@@ -4,7 +4,7 @@ import Home from "./Pages/Home";
 import Team from "./Pages/Team";
 import Calender from "./Pages/Calender";
 import Documents from "./Pages/Documents";
-import WatchList from "./Pages/WatchList";
+import WatchList from "./Pages/WatchList/WatchList";
 import Login from "./Pages/Authenthicate/Login"
 import Register from "./Pages/Authenthicate/Register"
 import styled from "styled-components";
@@ -17,6 +17,9 @@ import PublicRoute from "./Routes/PublicRoute";
 import "swiper/swiper.min.css";
 import "swiper/swiper-bundle.min.css";
 import "./App.scss";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setUser } from "./userAccount";
 const Pages = styled.div`
   width: 100vw;
   height: 100vh;
@@ -32,6 +35,12 @@ const Pages = styled.div`
 `;
 
 function App() {
+  let dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(setUser(localStorage.getItem("user")))
+  })
+
+
   return (
     <>
       <Navbar />
