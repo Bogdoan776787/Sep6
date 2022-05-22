@@ -16,6 +16,7 @@ export const LoginHeaderText = styled.h1 `
 width:fit-content;
 margin:0 0 30px 0;
 padding:0;
+color:linear-gradient(to right,#803bec 30%,#1b1b1b 100%);
 `
 
 export const LoginRedirectLink = styled(NavLink)`

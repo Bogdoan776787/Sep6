@@ -34,8 +34,20 @@ const HeroSlide = () => {
     getMovies();
   }, []);
 
+  // useEffect(() => {
+  //   let timeout ;
+  //   if (Swiper !== null) {
+  //     timeout = setTimeout(() => Swiper.update(), 500)
+  //   }
+  //   return () => {
+  //     clearTimeout(timeout)
+  //   }
+  // },[Swiper])
+
+
   return (
     <div className="hero-slide">
+      {movieItems.length>0 &&
       <Swiper
         modules={[Autoplay]}
         grabCursor={true}
@@ -44,7 +56,7 @@ const HeroSlide = () => {
         // autoplay={{delay: 3000}}
       >
         {movieItems.map((item, i) => (
-          <SwiperSlide key={i}>
+          <SwiperSlide key={i} >
             {({ isActive }) => (
               <HeroSlideItem
                 item={item}
@@ -54,6 +66,7 @@ const HeroSlide = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      }
       {movieItems.map((item, i) => (
         <TrailerModal key={i} item={item} />
       ))}
@@ -62,15 +75,19 @@ const HeroSlide = () => {
 };
 
 const HeroSlideItem = (props) => {
+  console.log("SET ACTIVATE")
   let navigate = useNavigate();
 
   const item = props.item;
+  console.log(item)
 
   const background = apiConfig.originalImage(
     item.backdrop_path ? item.backdrop_path : item.poster_path
   );
+  console.log("SET ACTIVATE2")
 
   const setModalActive = async () => {
+
     const modal = document.querySelector(`#modal_${item.id}`);
 
     const videos = await tmdbApi.getVideos(category.movie, item.id);
@@ -83,10 +100,9 @@ const HeroSlideItem = (props) => {
     } else {
       modal.querySelector(".modal__content").innerHTML = "No trailer";
     }
-
     modal.classList.toggle("active");
   };
-
+  console.log(item)
   return (
     <div
       className={`hero-slide__item ${props.className}`}

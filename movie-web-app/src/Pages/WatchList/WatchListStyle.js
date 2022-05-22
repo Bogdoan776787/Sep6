@@ -1,13 +1,23 @@
 import styled from "styled-components";
-import {} from "@mui/material"
+import {Typography} from "@mui/material"
 
 export const WatchListBackground = styled.div`
-    width:calc(100% - 3.5rem);
     height:100%;
     display:flex;
-    justify-content:center;
-    padding-top:50px;    
+    align-items:center;
+    padding-top:20px;    
+    margin-left:3.5rem;
+    flex-direction:column;
 `
 
+export const WatchListHeaderText = styled(Typography)
+`
+width:85%;
+text-align:left;
+padding-bottom:30px;
+color:#803bec;
+
+
+`
 
 

@@ -21,6 +21,8 @@ def lambda_handler(event, context):
             "listId":str(id_db),
             "movieId":body_params["movieId"],
             "userId":body_params["userId"],
+            #movie or tv series
+            "type":body_params["type"],
             "createdAt":dt_iso,
             "updatedAt":dt_iso
         }
