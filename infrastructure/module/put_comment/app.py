@@ -14,7 +14,6 @@ def lambda_handler(event, context):
     id_db=uuid.uuid4()
     status_code = 200
     body_params = json.loads(event["body"])
-    print("put comments")
     text_message="SUCCESS"
     table = db.Table("Comments")
     table.put_item(
@@ -22,6 +21,7 @@ def lambda_handler(event, context):
             "CommentId ":str(id_db),
             "MovieId":body_params["movieId"],
             "UserId":body_params["userId"],
+            "type":body_params["type"],
             "CommentText":body_params["commentText"],
             "createdAt":dt_iso,
             "updatedAt":dt_iso

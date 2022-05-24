@@ -39,6 +39,7 @@ const Pages = styled.div`
 function App() {
   let dispatch = useDispatch()
   useEffect(()=>{
+    localStorage.clear();
     dispatch(setUser(localStorage.getItem("user")))
   })
 

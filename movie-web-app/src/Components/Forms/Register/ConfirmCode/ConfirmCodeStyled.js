@@ -24,6 +24,7 @@ export const ConfirmCodeHelperText = styled(Typography)`
 width:420px;
 font-weight:normal;
 margin-bottom:20px!important;
+color:black;
 
 `
 
