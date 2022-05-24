@@ -8,7 +8,7 @@ import './detail.scss';
 import CastList from './CastList';
 import VideoList from './VideoList';
 
-import MovieList from '../../components/movie-list/MovieList';
+import MovieList from '../../Components/movie-list/MovieList';
 
 const Detail = () => {
 
@@ -18,11 +18,13 @@ const Detail = () => {
 
     useEffect(() => {
         const getDetail = async () => {
+            
             const response = await tmdbApi.detail(category, id, {params:{}});
             setItem(response);
             window.scrollTo(0,0);
         }
-        getDetail();
+        if(category!="actor")
+            getDetail();
     }, [category, id]);
 
     return (

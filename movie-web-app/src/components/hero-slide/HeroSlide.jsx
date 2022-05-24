@@ -25,35 +25,48 @@ const HeroSlide = () => {
         const response = await tmdbApi.getMoviesList(movieType.popular, {
           params,
         });
-        setMovieItems(response.results.slice(1, 4));
-        console.log(response);
+        setMovieItems(response.results.slice(0, 4));
+        
       } catch {
-        console.log("error");
+        
       }
     };
     getMovies();
   }, []);
 
+  // useEffect(() => {
+  //   let timeout ;
+  //   if (Swiper !== null) {
+  //     timeout = setTimeout(() => Swiper.update(), 500)
+  //   }
+  //   return () => {
+  //     clearTimeout(timeout)
+  //   }
+  // },[Swiper])
+
+
   return (
     <div className="hero-slide">
-      <Swiper
-        modules={[Autoplay]}
-        grabCursor={true}
-        spaceBetween={0}
-        slidesPerView={1}
-        // autoplay={{delay: 3000}}
-      >
-        {movieItems.map((item, i) => (
-          <SwiperSlide key={i}>
-            {({ isActive }) => (
-              <HeroSlideItem
-                item={item}
-                className={`${isActive ? "active" : ""}`}
-              />
-            )}
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {movieItems.length > 0 && (
+        <Swiper
+          modules={[Autoplay]}
+          grabCursor={true}
+          spaceBetween={0}
+          slidesPerView={1}
+          // autoplay={{delay: 3000}}
+        >
+          {movieItems.map((item, i) => (
+            <SwiperSlide key={i}>
+              {({ isActive }) => (
+                <HeroSlideItem
+                  item={item}
+                  className={`${isActive ? "active" : ""}`}
+                />
+              )}
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
       {movieItems.map((item, i) => (
         <TrailerModal key={i} item={item} />
       ))}
@@ -62,15 +75,19 @@ const HeroSlide = () => {
 };
 
 const HeroSlideItem = (props) => {
+  
   let navigate = useNavigate();
 
   const item = props.item;
+  
 
   const background = apiConfig.originalImage(
     item.backdrop_path ? item.backdrop_path : item.poster_path
   );
+  
 
   const setModalActive = async () => {
+
     const modal = document.querySelector(`#modal_${item.id}`);
 
     const videos = await tmdbApi.getVideos(category.movie, item.id);
@@ -83,10 +100,9 @@ const HeroSlideItem = (props) => {
     } else {
       modal.querySelector(".modal__content").innerHTML = "No trailer";
     }
-
     modal.classList.toggle("active");
   };
-
+  
   return (
     <div
       className={`hero-slide__item ${props.className}`}

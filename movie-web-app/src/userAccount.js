@@ -8,11 +8,12 @@ export const userAccount = createSlice({
   },
   reducers: {
     setUser: (state,action) => {
-    console.log(action)
       state.data = action.payload
+      localStorage.setItem("user",state.data)
     },
     clearUser: (state) => {
       state.data = null
+      localStorage.clear()
     }
   },
 })

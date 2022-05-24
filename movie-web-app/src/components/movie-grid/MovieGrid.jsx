@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 
 import "./movie-grid.scss";
 
@@ -98,9 +98,9 @@ const MovieSearch = (props) => {
 
   const goToSearch = useCallback(() => {
     if (keyword.trim().length > 0) {
-      navigate.push(`/${category[props.category]}/search/${keyword}`);
+      navigate(`/${category[props.category]}/search/${keyword}`);
     }
-  }, [keyword, props.category, history]);
+  }, [keyword, props.category, navigate]);
 
   useEffect(() => {
     const enterEvent = (e) => {

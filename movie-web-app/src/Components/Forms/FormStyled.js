@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Typography } from "@material-ui/core";
 
 
 export const SubmitButton = styled.input`
@@ -7,14 +8,19 @@ export const SubmitButton = styled.input`
     margin-top:20px;
     margin-bottom:20px;
     border-radius:15px;
-    background-color:var(--background);
+    background-color:rgba(137, 171, 245, 0.37);
     border:none;
     &:hover{
         background-color:white;
-        border:3px solid var(--background)
+        border:3px solid rgba(137, 171, 245, 0.37);
     }
     `
 
 export const InputWrapper = styled.div`
 margin-bottom:25px
+`
+
+export const TextRedirectHelper = styled(Typography)
+`
+color:black;
 `

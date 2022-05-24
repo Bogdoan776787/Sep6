@@ -1,5 +1,5 @@
 import { Form, LoginHeaderText, LoginRedirectLink, LoginErrorMessage } from "./LoginFormStyled";
-import { SubmitButton, InputWrapper } from "../FormStyled"
+import { SubmitButton, InputWrapper,TextRedirectHelper } from "../FormStyled"
 import FieldInputController from "../../Controller/FieldInputController";
 import { Typography } from "@mui/material"
 
@@ -57,10 +57,10 @@ const LoginForm = (props) => {
     <LoginErrorMessage>{errors.username?.message || errors.password?.message  || props.error}</LoginErrorMessage>
 
     <SubmitButton type="submit" />
-    <Typography>
+    <TextRedirectHelper>
       Don't have an account?
       <LoginRedirectLink to="/register">SignUp</LoginRedirectLink>
-    </Typography>
+    </TextRedirectHelper>
 
 
 
