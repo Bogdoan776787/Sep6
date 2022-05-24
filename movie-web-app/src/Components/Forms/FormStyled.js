@@ -9,10 +9,13 @@ export const SubmitButton = styled.input`
     margin-bottom:20px;
     border-radius:15px;
     background-color:rgba(137, 171, 245, 0.37);
+    color:white;
     border:none;
     &:hover{
         background-color:white;
         border:3px solid rgba(137, 171, 245, 0.37);
+        color:rgba(137, 171, 245, 0.37);
+        padding:0;
     }
     `
 
