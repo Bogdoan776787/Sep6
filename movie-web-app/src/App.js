@@ -56,7 +56,7 @@ function App() {
             <Route path="/:category/search/:keyword" element={<Catalog />} />
             <Route path="/:category/:id" element={<Detail />} />
             <Route path="/:category" element={<Catalog />} />
-            <Route path="/:actor/:id" element={<ActorDetail />} />
+            <Route path="/actor/:id" element={<ActorDetail />} />
             <Route path="/watch-list" element={<PrivateRoute><WatchList/></PrivateRoute>} />
 
              <Route path="/login" element={

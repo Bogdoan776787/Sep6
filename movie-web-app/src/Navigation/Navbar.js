@@ -224,11 +224,11 @@ const Navbar = () => {
             <img src={Home} alt="Home" />
             <Text clicked={click}>Home</Text>
           </Item>
-          <Item onClick={() => setClick(false)} to="/details">
+          <Item onClick={() => setClick(false)} to="/movie">
             <img src={Team} alt="Team" />
             <Text clicked={click}>Team</Text>
           </Item>
-          <Item onClick={() => setClick(false)} to="/calender">
+          <Item onClick={() => setClick(false)} to="/tv">
             <img src={Calender} alt="Calender" />
             <Text clicked={click}>Calender</Text>
           </Item>

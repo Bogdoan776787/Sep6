@@ -16,6 +16,10 @@ import {
 
 
 const WatchMovieCard = (props) => {
+  const removeFromWatchList = async () =>
+  {
+    props.removeFromList(props.listId);
+  }
   let date = props.movieReleaseData
   date = new Date(date)
   date = date.toDateString()
@@ -35,7 +39,7 @@ const WatchMovieCard = (props) => {
       <MovieDescriptionText> {props.movieDescription}</MovieDescriptionText>
     </CardInfo>
     <WatchedIconWrapper>
-    <WatchedIcon />
+    <WatchedIcon  onClick={removeFromWatchList}/>
     </WatchedIconWrapper>
 
   </WatchMovieCardWrapper>

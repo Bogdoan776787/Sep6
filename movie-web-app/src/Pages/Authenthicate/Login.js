@@ -19,12 +19,12 @@ const Login = () => {
   const signIn = async (username, password) => {
     try {
       const user = await Auth.signIn(username, password)
-      console.log(user.username)
+      
       dispatch(setUser(user.username));
       navigate("/")
     }
     catch (error) {
-      console.log(error)
+      
       setLoginError("Invalid Email or password")
     }
   };

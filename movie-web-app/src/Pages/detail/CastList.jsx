@@ -13,10 +13,12 @@ const CastList = (props) => {
 
   useEffect(() => {
     const getCredits = async () => {
+      
       const res = await tmdbApi.credits(category, props.id);
       setCasts(res.cast.slice(0, 5));
     };
-    getCredits();
+    if(category!="actor")
+      getCredits();
   }, [category, props.id]);
   return (
     <div className="casts">

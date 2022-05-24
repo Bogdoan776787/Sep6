@@ -26,9 +26,9 @@ const HeroSlide = () => {
           params,
         });
         setMovieItems(response.results.slice(0, 4));
-        console.log(response);
+        
       } catch {
-        console.log("error");
+        
       }
     };
     getMovies();
@@ -47,28 +47,6 @@ const HeroSlide = () => {
 
   return (
     <div className="hero-slide">
-<<<<<<< HEAD
-      {movieItems.length>0 &&
-      <Swiper
-        modules={[Autoplay]}
-        grabCursor={true}
-        spaceBetween={0}
-        slidesPerView={1}
-        // autoplay={{delay: 3000}}
-      >
-        {movieItems.map((item, i) => (
-          <SwiperSlide key={i} >
-            {({ isActive }) => (
-              <HeroSlideItem
-                item={item}
-                className={`${isActive ? "active" : ""}`}
-              />
-            )}
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      }
-=======
       {movieItems.length > 0 && (
         <Swiper
           modules={[Autoplay]}
@@ -89,7 +67,6 @@ const HeroSlide = () => {
           ))}
         </Swiper>
       )}
->>>>>>> 3917fe7d09d3d56027dab18cbf04552681aa11c0
       {movieItems.map((item, i) => (
         <TrailerModal key={i} item={item} />
       ))}
@@ -98,16 +75,16 @@ const HeroSlide = () => {
 };
 
 const HeroSlideItem = (props) => {
-  console.log("SET ACTIVATE")
+  
   let navigate = useNavigate();
 
   const item = props.item;
-  console.log(item)
+  
 
   const background = apiConfig.originalImage(
     item.backdrop_path ? item.backdrop_path : item.poster_path
   );
-  console.log("SET ACTIVATE2")
+  
 
   const setModalActive = async () => {
 
@@ -125,7 +102,7 @@ const HeroSlideItem = (props) => {
     }
     modal.classList.toggle("active");
   };
-  console.log(item)
+  
   return (
     <div
       className={`hero-slide__item ${props.className}`}

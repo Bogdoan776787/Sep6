@@ -9,16 +9,31 @@ const WatchListComponent = () => {
 
   useEffect(() => {
     const getList = async () => {
-        let response = await serverApi.getWatchList(localStorage.getItem("user"));;        
-        setMovies(response);
+        let response = await serverApi.getWatchList(localStorage.getItem("user"));
+        console.log(response)     
+        setMovies(response.data);
     }
     getList();
 }, []);
+  const removeDataFromList = async (listId) =>
+  {
+    let response = await serverApi.removeFromWatchList(listId).then(data=>
+      {
+        console.log(data)
+      }).catch(error=>
+        {
+          console.log(error)
+        })
+    console.log(response)
+    let newMovies = movies.filter(movie=>movie.listId!=listId)
+    setMovies(newMovies);
+    console.log(response)
+  }
   return <WatchListBackground>
     <WatchListHeaderText variant="h3">My Watch List:</WatchListHeaderText>
     {
       movies.map((value,key)=>(
-        <WatchMovieCard key={key}  {...value}/>
+        <WatchMovieCard removeFromList = {removeDataFromList} key={key}  {...value}/>
       ))
     }
   </WatchListBackground>;

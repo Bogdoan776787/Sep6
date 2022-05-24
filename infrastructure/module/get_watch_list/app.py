@@ -14,24 +14,30 @@ def lambda_handler(event, context):
 
     #calling tmdb in order to extract rating
     api_external_key = "2bc24570068939f0e5e7d4182262a186"
-    url = "https://api.themoviedb.org/3/movie/MOVIE_ID?api_key=2bc24570068939f0e5e7d4182262a186&language=en-US"
+    url = "https://api.themoviedb.org/3/TYPE/MOVIE_ID?api_key=2bc24570068939f0e5e7d4182262a186&language=en-US"
     query_params = event["queryStringParameters"]
-
-
     items = getWatchListTable(query_params["userId"])
 
     #get reviews and add review to the item data
     for item in items:
         movieUrl = url.replace("MOVIE_ID", item["movieId"])
+        movieUrl = movieUrl.replace("TYPE", item["type"])
+        movieTitleTag = "title" if item["type"] == "movie"  else "original_name"
+        releaseDate = "release_date" if item["type"] == "movie"  else "first_air_date"
         resp = requests.get(movieUrl).json()
         item["movieRating"] = resp["vote_average"]
-        item["movieName"] = resp["title"]
+        item["movieName"] = resp[movieTitleTag]
         item["movieDescription"] = resp["overview"]
         item["moviePhoto_src"] =  "https://image.tmdb.org/t/p/w600_and_h900_bestv2" + resp["poster_path"]
-        item["movieReleaseData"] = resp["release_date"]
+        item["movieReleaseData"] = resp[releaseDate]
 
     return {
         "statusCode": status_code,
+        "headers": {
+            "Access-Control-Allow-Headers" : "Content-Type",
+            "Access-Control-Allow-Origin": "*", 
+            "Access-Control-Allow-Methods": "GET"  
+        },
         "body": json.dumps(items),
     }
 
