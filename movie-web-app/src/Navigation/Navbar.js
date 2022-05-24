@@ -58,7 +58,7 @@ const Button = styled.button`
 
 const SidebarContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(61, 61, 63, 0.37);
+
   backdrop-filter: blur(7.5px);
   -webkit-backdrop-filter: blur(7.5px);
   width: 3.5rem;
@@ -82,7 +82,6 @@ const Logo = styled.div`
 `;
 
 const SlickBar = styled.ul`
-  color: var(--white);
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -144,7 +143,7 @@ const Profile = styled.div`
   box-shadow: 0 8px 32px 0 rgba(61, 61, 63, 0.37);
   backdrop-filter: blur(7.5px);
   -webkit-backdrop-filter: blur(7.5px);
-  color: var(--white);
+
   transition: all 0.3s ease;
   img {
     width: 3rem;
@@ -225,7 +224,7 @@ const Navbar = () => {
             <img src={Home} alt="Home" />
             <Text clicked={click}>Home</Text>
           </Item>
-          <Item onClick={() => setClick(false)} to="/team">
+          <Item onClick={() => setClick(false)} to="/details">
             <img src={Team} alt="Team" />
             <Text clicked={click}>Team</Text>
           </Item>
