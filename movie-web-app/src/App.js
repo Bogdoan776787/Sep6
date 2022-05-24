@@ -5,11 +5,16 @@ import Team from "./Pages/Team";
 import Calender from "./Pages/Calender";
 import Documents from "./Pages/Documents";
 import Projects from "./Pages/Projects";
+
+import Catalog from "./Pages/Catalog";
+import Detail from "./Pages/detail/Detail";
 import styled from "styled-components";
 import { AnimatePresence } from "framer-motion";
 import "swiper/swiper.min.css";
 import "swiper/swiper-bundle.min.css";
 import "./App.scss";
+import ActorDetail from "./Pages/detail/ActorDetail";
+
 const Pages = styled.div`
   width: 100vw;
   height: 100vh;
@@ -32,7 +37,10 @@ function App() {
         <AnimatePresence exitBeforeEnter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/team" element={<Team />} />
+            <Route path="/:category/search/:keyword" element={<Catalog />} />
+            <Route path="/:category/:id" element={<Detail />} />
+            <Route path="/:category" element={<Catalog />} />
+            <Route path="/:actor/:id" element={<ActorDetail />} />
             <Route path="/calender" element={<Calender />} />
             <Route path="/documents" element={<Documents />} />
             <Route path="/projects" element={<Projects />} />
