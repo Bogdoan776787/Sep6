@@ -3,7 +3,7 @@ import {Typography} from "@mui/material"
 import ReactLoading from "react-loading";
 
 
-export const WatchListBackground = styled.div`
+export const FavoriteBackground = styled.div`
     height:100%;
     display:flex;
     align-items:center;
@@ -13,7 +13,7 @@ export const WatchListBackground = styled.div`
     flex-direction:column;
 `
 
-export const WatchListHeaderText = styled(Typography)
+export const FavoriteHeaderText = styled(Typography)
 `
 width:fit-content;
 text-align:left;
@@ -22,14 +22,14 @@ color:#803bec;
 `
 
 
-export const WatchListCategory = styled(Typography)
+export const FavoriteCategory = styled(Typography)
 `
 color:${props=>props.active==="true"? "#803bec":"white"};
 padding-left:30px;
 
 `
 
-export const WatchListTextWrapper = styled.div
+export const FavoriteTextWrapper = styled.div
 `
 width:85%;
 display flex;

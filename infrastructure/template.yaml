@@ -134,6 +134,43 @@ Resources:
             Method: delete
             RestApiId: !Ref Api
 
+  #FAVORITE
+  GetFavoriteFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: module/get_favorites/
+      Events:
+        GetReviews:
+          Type: Api
+          Properties:
+            Path: /favorite
+            Method: get
+            RestApiId: !Ref Api
+
+  PutFavoriteFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: module/put_favorite/
+      Events:
+        GetReviews:
+          Type: Api
+          Properties:
+            Path: /favorite
+            Method: put
+            RestApiId: !Ref Api
+
+  DeleteFavoriteFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: module/delete_favorite/
+      Events:
+        GetReviews:
+          Type: Api
+          Properties:
+            Path: /favorite
+            Method: delete
+            RestApiId: !Ref Api
+
 
   #DynamoDB    
   UsersTable:      
@@ -166,6 +203,14 @@ Resources:
       TableName: "WatchList"
       PrimaryKey: 
         Name: "listId"
+        Type: "String"
+
+  FavoriteTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: "Favorite"
+      PrimaryKey: 
+        Name: "FavoriteId"
         Type: "String"
 
 

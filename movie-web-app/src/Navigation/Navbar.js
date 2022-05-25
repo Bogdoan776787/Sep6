@@ -5,7 +5,8 @@ import logo from "../assets/logo.svg";
 import Home from "../assets/home-solid.svg";
 import Team from "../assets/social.svg";
 import Calender from "../assets/sceduled.svg";
-import Projects from "../assets/starred.svg";
+import WatchListIcon from "../assets/WatchList.svg"
+import FavoriteIcon from "../assets/starred.svg"
 import Documents from "../assets/draft.svg";
 import PowerOff from "../assets/power-off-solid.svg";
 import styled from "styled-components";
@@ -232,15 +233,15 @@ const Navbar = () => {
             <img src={Calender} alt="Calender" />
             <Text clicked={click}>Calender</Text>
           </Item>
-          <Item onClick={() => setClick(false)} to="/documents">
-            <img src={Documents} alt="Documents" />
-            <Text clicked={click}>Documents</Text>
+          <Item onClick={() => setClick(false)} to="/favorite">
+            <img src={FavoriteIcon} alt="Favorite" />
+            <Text clicked={click}>Favorite Shows</Text>
           </Item>
           {user.data && <Item
             onClick={() => setClick(false)}
             to="/watch-list"
           >
-            <img src={Projects} alt="WatchList" />
+            <img src={WatchListIcon} alt="WatchList" />
             <Text clicked={click}>Watch List</Text>
           </Item>
 } 
