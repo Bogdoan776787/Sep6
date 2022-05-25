@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 import { AuthenthicateBackground } from "./Style"
 import RegisterForm from "../../Components/Forms/Register/RegisterForm";
@@ -46,8 +46,8 @@ const Register = () => {
 
 
   return <AuthenthicateBackground>
-    {registrationStep == "signUp" && <RegisterForm handleSubmit={signUp} error={userNameError}></RegisterForm>}
-    {registrationStep == "confirmationCode" && <ConfirmCodeForm handleSubmit={confirmCode} error={codeError} resendCode = {resendCode}></ConfirmCodeForm>}
+    {registrationStep === "signUp" && <RegisterForm handleSubmit={signUp} error={userNameError}></RegisterForm>}
+    {registrationStep === "confirmationCode" && <ConfirmCodeForm handleSubmit={confirmCode} error={codeError} resendCode = {resendCode}></ConfirmCodeForm>}
   </AuthenthicateBackground>;
 };
 

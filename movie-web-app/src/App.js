@@ -21,6 +21,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "./userAccount";
 import ActorDetail from "./Pages/detail/ActorDetail";
+import Favorite from "./Pages/Favorite/FavoriteList";
 
 const Pages = styled.div`
   width: 100vw;
@@ -39,7 +40,6 @@ const Pages = styled.div`
 function App() {
   let dispatch = useDispatch()
   useEffect(()=>{
-    localStorage.clear();
     dispatch(setUser(localStorage.getItem("user")))
   })
 
@@ -58,6 +58,7 @@ function App() {
             <Route path="/:category/:id" element={<Detail />} />
             <Route path="/:category" element={<Catalog />} />
             <Route path="/actor/:id" element={<ActorDetail />} />
+            <Route path="/favorite" element={<PrivateRoute><Favorite/></PrivateRoute>} />
             <Route path="/watch-list" element={<PrivateRoute><WatchList/></PrivateRoute>} />
 
              <Route path="/login" element={
