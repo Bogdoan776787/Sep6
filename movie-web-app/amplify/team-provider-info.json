@@ -1,0 +1,27 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-moviewebapp-dev-123519-authRole",
+      "UnauthRoleArn": "arn:aws:iam::717920861528:role/amplify-moviewebapp-dev-123519-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::717920861528:role/amplify-moviewebapp-dev-123519-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-moviewebapp-dev-123519-deployment",
+      "UnauthRoleName": "amplify-moviewebapp-dev-123519-unauthRole",
+      "StackName": "amplify-moviewebapp-dev-123519",
+      "StackId": "arn:aws:cloudformation:eu-central-1:717920861528:stack/amplify-moviewebapp-dev-123519/e1f9deb0-d503-11ec-8e0c-0297a949538c",
+      "AmplifyAppId": "dbdw68bsaiskk",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-moviewebapp-dev-123519-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "moviewebapp4660266546602665": {}
+      },
+      "function": {
+        "moviewebapp4660266546602665PostConfirmation": {
+          "deploymentBucketName": "amplify-moviewebapp-dev-123519-deployment",
+          "s3Key": "amplify-builds/moviewebapp4660266546602665PostConfirmation-4d596634467735703173-build.zip"
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,8 @@
 import React from "react";
 
 import "./movie-card.scss";
-
+import { TextField, Typography, CircularProgress } from "@material-ui/core";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { category } from "../../api/tmdbApi";
@@ -16,6 +17,10 @@ const MovieCard = (props) => {
 
   return (
     <Link to={link}>
+      <RatingWrapper>
+        <RatingNumber>{item.vote_average * 10}</RatingNumber>
+        <RatingCircle variant="determinate" value={item.vote_average * 10} />
+      </RatingWrapper>
       <div
         className="movie-card"
         style={{ backgroundImage: `url(${bg})` }}
@@ -26,3 +31,33 @@ const MovieCard = (props) => {
 };
 
 export default MovieCard;
+
+export const RatingCircle = styled(CircularProgress)`
+  color: green !important;
+  background-color: black;
+  border-radius: 50%;
+  width: 50px !important;
+  height: 50px !important;
+`;
+
+export const RatingWrapper = styled.div`
+  position: relative;
+  top: 60px;
+  left: 5px;
+  display: flex;
+  display: flex;
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+`;
+
+export const RatingNumber = styled.span`
+  position: absolute;
+  font-size: 14px;
+  font-weight: 900;
+  color: white;
+
+  z-index: 2;
+`;

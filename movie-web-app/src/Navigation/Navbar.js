@@ -10,6 +10,8 @@ import Documents from "../assets/draft.svg";
 import PowerOff from "../assets/power-off-solid.svg";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { useSelector } from 'react-redux'
+
 
 const Container = styled.div`
   position: fixed;
@@ -200,6 +202,8 @@ const Logout = styled.button`
 `;
 
 const Navbar = () => {
+  let user = useSelector(state=>state.user)
+
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
@@ -220,11 +224,11 @@ const Navbar = () => {
             <img src={Home} alt="Home" />
             <Text clicked={click}>Home</Text>
           </Item>
-          <Item onClick={() => setClick(false)} to="/details">
+          <Item onClick={() => setClick(false)} to="/movie">
             <img src={Team} alt="Team" />
             <Text clicked={click}>Team</Text>
           </Item>
-          <Item onClick={() => setClick(false)} to="/calender">
+          <Item onClick={() => setClick(false)} to="/tv">
             <img src={Calender} alt="Calender" />
             <Text clicked={click}>Calender</Text>
           </Item>
@@ -232,12 +236,16 @@ const Navbar = () => {
             <img src={Documents} alt="Documents" />
             <Text clicked={click}>Documents</Text>
           </Item>
-          <Item onClick={() => setClick(false)} to="/projects">
-            <img src={Projects} alt="Projects" />
-            <Text clicked={click}>Projects</Text>
+          {user.data && <Item
+            onClick={() => setClick(false)}
+            to="/watch-list"
+          >
+            <img src={Projects} alt="WatchList" />
+            <Text clicked={click}>Watch List</Text>
           </Item>
+} 
         </SlickBar>
-
+        {user.data &&
         <Profile clicked={profileClick}>
           <img
             onClick={() => handleProfileClick()}
@@ -255,6 +263,7 @@ const Navbar = () => {
             </Logout>
           </Details>
         </Profile>
+}
       </SidebarContainer>
     </Container>
   );

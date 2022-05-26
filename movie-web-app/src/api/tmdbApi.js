@@ -51,7 +51,7 @@ const tmdbApi = {
   },
   actor: (act, id) => {
     const url = "/actor" + actor[act] + id;
-    console.log(url);
+    
     return axiosClient.get(url, { params: {} });
   },
 };

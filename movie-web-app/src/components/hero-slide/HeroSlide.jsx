@@ -26,13 +26,24 @@ const HeroSlide = () => {
           params,
         });
         setMovieItems(response.results.slice(0, 4));
-        console.log(response);
+        
       } catch {
-        console.log("error");
+        
       }
     };
     getMovies();
   }, []);
+
+  // useEffect(() => {
+  //   let timeout ;
+  //   if (Swiper !== null) {
+  //     timeout = setTimeout(() => Swiper.update(), 500)
+  //   }
+  //   return () => {
+  //     clearTimeout(timeout)
+  //   }
+  // },[Swiper])
+
 
   return (
     <div className="hero-slide">
@@ -64,15 +75,19 @@ const HeroSlide = () => {
 };
 
 const HeroSlideItem = (props) => {
+  
   let navigate = useNavigate();
 
   const item = props.item;
+  
 
   const background = apiConfig.originalImage(
     item.backdrop_path ? item.backdrop_path : item.poster_path
   );
+  
 
   const setModalActive = async () => {
+
     const modal = document.querySelector(`#modal_${item.id}`);
 
     const videos = await tmdbApi.getVideos(category.movie, item.id);
@@ -85,10 +100,9 @@ const HeroSlideItem = (props) => {
     } else {
       modal.querySelector(".modal__content").innerHTML = "No trailer";
     }
-
     modal.classList.toggle("active");
   };
-
+  
   return (
     <div
       className={`hero-slide__item ${props.className}`}
