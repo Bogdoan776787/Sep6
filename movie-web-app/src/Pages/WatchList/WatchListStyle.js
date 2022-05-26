@@ -44,3 +44,9 @@ export const Loading = styled(ReactLoading)
     top: calc(50% - 150px);
     left: calc(50% - 150px);
 `
+export const NotFoundText = styled(Typography)
+`
+width:85%;
+color:white;
+padding-top:10px;
+`

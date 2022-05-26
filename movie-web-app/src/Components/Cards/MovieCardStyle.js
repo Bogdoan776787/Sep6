@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import {  Typography, CircularProgress } from "@material-ui/core";
 import { ReactComponent as Icon } from "./../../assets/unstar.svg"
+import { ReactComponent as watchedIcon } from "./../../assets/watchedSvg.svg"
 import { Link } from "react-router-dom";
 
 
-export const FavoriteMovieCardWrapper = styled.div`
+export const MovieCardWrapper = styled.div`
 position:relative;
     width:85%;
     min-height:180px;
@@ -102,6 +103,10 @@ export const MovieDescriptionText = styled(Typography)
     white-space: wrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    &:hover
+    {
+        color:black;
+    }
     `
 
 
@@ -114,6 +119,16 @@ export const FavoriteRemoveIcon = styled(Icon)
     `
     fill: white;
     height: 25px;
+    &:hover
+    {
+        fill:#803bec;
+    }
+
+`
+export const WatchedIcon = styled(watchedIcon)
+    `
+    fill: white;
+    height: 20px;
     &:hover
     {
         fill:#803bec;

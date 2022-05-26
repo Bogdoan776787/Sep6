@@ -1,5 +1,5 @@
 import {
-  WatchMovieCardWrapper,
+  IconWrapper,
   ImageCard, CardInfo,
   MovieNameWrapper,
   CardMovieDate,
@@ -10,9 +10,9 @@ import {
   RatingNumber,
   RatingCircle,
   MovieHighlightWrapper,
-  WatchedIconWrapper,
+  MovieCardWrapper,
   ImageLink
-} from "./WatchMovieCardStyle"
+} from "./MovieCardStyle"
 import { Link } from "react-router-dom";
 
 
@@ -31,7 +31,7 @@ const WatchMovieCard = (props) => {
   let date = props.movieReleaseData
   date = new Date(date)
   date = date.toDateString()
-  return <WatchMovieCardWrapper onClick={()=>console.log()}>
+  return <MovieCardWrapper onClick={()=>console.log()}>
     <ImageLink to={link}>
     <ImageCard src={props.moviePhoto_src} onClick={navigateToDetails} alt={props.movieName}></ImageCard>
     </ImageLink>
@@ -48,13 +48,15 @@ const WatchMovieCard = (props) => {
           <CardMovieDate variant="subtitle1" component="div">{date}</CardMovieDate>
         </MovieNameWrapper>
       </MovieHighlightWrapper>
+      <Link to={link}>
       <MovieDescriptionText> {props.movieDescription}</MovieDescriptionText>
+      </Link>
     </CardInfo>
-    <WatchedIconWrapper>
+    <IconWrapper>
     <WatchedIcon  onClick={removeFromWatchList}/>
-    </WatchedIconWrapper>
+    </IconWrapper>
 
-  </WatchMovieCardWrapper>
+  </MovieCardWrapper>
 };
 
 

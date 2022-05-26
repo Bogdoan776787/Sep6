@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 const Actor = (props) => {
   const item = props.item;
   const link = "/" + actor["actor"] + "/" + item.id;
-  
-  
+  console.log(item);
   return (
     <Link to={link}>
       <div

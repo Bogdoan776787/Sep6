@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import {} from "@mui/material"
-
 export const AuthenthicateBackground = styled.div`
     width:100%;
     height:100%;
