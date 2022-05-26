@@ -30,7 +30,7 @@ def lambda_handler(event, context):
         for item in items:
             movieUrl = url.replace("MOVIE_ID", item["movieId"])
             movieUrl = movieUrl.replace("TYPE", item["type"])
-            movieTitleTag = "title" if item["type"] == "movie"  else "original_name"
+            movieTitleTag = "title" if item["type"] == "movie"  else "name"
             releaseDate = "release_date" if item["type"] == "movie"  else "first_air_date"
             resp = requests.get(movieUrl).json()
             item["movieRating"] = resp["vote_average"]

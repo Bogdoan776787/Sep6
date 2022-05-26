@@ -7,11 +7,14 @@ import Team from "../assets/social.svg";
 import Calender from "../assets/sceduled.svg";
 import WatchListIcon from "../assets/WatchList.svg"
 import FavoriteIcon from "../assets/starred.svg"
-import Documents from "../assets/draft.svg";
-import PowerOff from "../assets/power-off-solid.svg";
+import Login from "../assets/login.svg"
+import Logout from "../assets/logout.svg"
+
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { clearUser } from "./../userAccount"
+
 
 
 const Container = styled.div`
@@ -130,86 +133,90 @@ const Text = styled.span`
   transition: all 0.3s ease;
 `;
 
-const Profile = styled.div`
-  width: ${(props) => (props.clicked ? "14rem" : "3rem")};
-  height: 3rem;
-  padding: 0.5rem 1rem;
-  /* border: 2px solid var(--white); */
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: ${(props) => (props.clicked ? "9rem" : "0")};
-  background-color: rgba(0, 0, 0, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(61, 61, 63, 0.37);
-  backdrop-filter: blur(7.5px);
-  -webkit-backdrop-filter: blur(7.5px);
+// const Profile = styled.div`
+//   width: ${(props) => (props.clicked ? "14rem" : "3rem")};
+//   height: 3rem;
+//   padding: 0.5rem 1rem;
+//   /* border: 2px solid var(--white); */
+//   border-radius: 20px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   margin-left: ${(props) => (props.clicked ? "9rem" : "0")};
+//   background-color: rgba(0, 0, 0, 0.25);
+//   box-shadow: 0 8px 32px 0 rgba(61, 61, 63, 0.37);
+//   backdrop-filter: blur(7.5px);
+//   -webkit-backdrop-filter: blur(7.5px);
 
-  transition: all 0.3s ease;
-  img {
-    width: 3rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    cursor: pointer;
-    &:hover {
-      border: 2px solid var(--grey);
-      padding: 2px;
-    }
-  }
-`;
+//   transition: all 0.3s ease;
+//   img {
+//     width: 3rem;
+//     height: 2.5rem;
+//     border-radius: 50%;
+//     cursor: pointer;
+//     &:hover {
+//       border: 2px solid var(--grey);
+//       padding: 2px;
+//     }
+//   }
+// `;
 
-const Details = styled.div`
-  display: ${(props) => (props.clicked ? "flex" : "none")};
-  justify-content: space-between;
-  align-items: center;
-`;
+// const Details = styled.div`
+//   display: ${(props) => (props.clicked ? "flex" : "none")};
+//   justify-content: space-between;
+//   align-items: center;
+// `;
 
-const Name = styled.div`
-  padding: 0 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  h4 {
-    display: inline-block;
-  }
-  a {
-    font-size: 0.8rem;
-    text-decoration: none;
-    color: var(--grey);
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
+// const Name = styled.div`
+//   padding: 0 1.5rem;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   h4 {
+//     display: inline-block;
+//   }
+//   a {
+//     font-size: 0.8rem;
+//     text-decoration: none;
+//     color: var(--grey);
+//     &:hover {
+//       text-decoration: underline;
+//     }
+//   }
+// `;
 
-const Logout = styled.button`
-  border: none;
-  width: 2rem;
-  height: 2rem;
-  background-color: transparent;
-  img {
-    width: 100%;
-    height: auto;
-    filter: invert(15%) sepia(70%) saturate(6573%) hue-rotate(2deg)
-      brightness(100%) contrast(126%);
-    transition: all 0.3s ease;
-    &:hover {
-      border: none;
-      padding: 0;
-      opacity: 0.5;
-    }
-  }
-`;
+// const Logout = styled.button`
+//   border: none;
+//   width: 2rem;
+//   height: 2rem;
+//   background-color: transparent;
+//   img {
+//     width: 100%;
+//     height: auto;
+//     filter: invert(15%) sepia(70%) saturate(6573%) hue-rotate(2deg)
+//       brightness(100%) contrast(126%);
+//     transition: all 0.3s ease;
+//     &:hover {
+//       border: none;
+//       padding: 0;
+//       opacity: 0.5;
+//     }
+//   }
+// `;
 
 const Navbar = () => {
-  let user = useSelector(state=>state.user)
+  let user = useSelector(state => state.user)
+  const dispatch = useDispatch();
+
 
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
+  const logOutUser = () => {
+    dispatch(clearUser());
+  }
 
-  const [profileClick, setprofileClick] = useState(false);
-  const handleProfileClick = () => setprofileClick(!profileClick);
+
 
   return (
     <Container>
@@ -233,10 +240,11 @@ const Navbar = () => {
             <img src={Calender} alt="Calender" />
             <Text clicked={click}>Calender</Text>
           </Item>
-          <Item onClick={() => setClick(false)} to="/favorite">
+          {user.data && <Item onClick={() => setClick(false)} to="/favorite">
             <img src={FavoriteIcon} alt="Favorite" />
             <Text clicked={click}>Favorite Shows</Text>
           </Item>
+          }
           {user.data && <Item
             onClick={() => setClick(false)}
             to="/watch-list"
@@ -244,27 +252,26 @@ const Navbar = () => {
             <img src={WatchListIcon} alt="WatchList" />
             <Text clicked={click}>Watch List</Text>
           </Item>
-} 
+          }
+          {user.data == null && <Item
+            onClick={() => setClick(false)}
+            to="/login"
+          >
+            <img src={Login} alt="Log in" />
+            <Text clicked={click}>Log In</Text>
+          </Item>
+          }
+          {user.data &&
+            <Item
+              onClick={() => logOutUser()}
+              to="/login"
+            >
+              <img src={Logout} alt="Log out" />
+              <Text clicked={click}>Log Out</Text>
+            </Item>
+          }
         </SlickBar>
-        {user.data &&
-        <Profile clicked={profileClick}>
-          <img
-            onClick={() => handleProfileClick()}
-            src="https://picsum.photos/200"
-            alt="Profile"
-          />
-          <Details clicked={profileClick}>
-            <Name>
-              <h4>Jhon&nbsp;Doe</h4>
-              <a href="/#">view&nbsp;profile</a>
-            </Name>
 
-            <Logout>
-              <img src={PowerOff} alt="logout" />
-            </Logout>
-          </Details>
-        </Profile>
-}
       </SidebarContainer>
     </Container>
   );

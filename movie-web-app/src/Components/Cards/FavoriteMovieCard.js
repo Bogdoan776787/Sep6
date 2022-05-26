@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import {
-    FavoriteMovieCardWrapper,
+    MovieCardWrapper,
     ImageCard, CardInfo,
     MovieNameWrapper,
     CardMovieDate,
@@ -13,13 +13,13 @@ import {
     MovieHighlightWrapper,
     IconWrapper,
     ImageLink
-  } from "./FavoriteMovieCardStyle"
+  } from "./MovieCardStyle"
 
   
   
   
   const FavoriteMovieCard = (props) => {
-    const link = "/" + props.type + "/" +  props.movieId
+    const movieLink = "/" + props.type + "/" +  props.movieId
     const removeFromFavoriteList = async () =>
     {
       props.removeFromList(props.FavoriteId);
@@ -27,8 +27,8 @@ import {
     let date = props.movieReleaseData
     date = new Date(date)
     date = date.toDateString()
-    return <FavoriteMovieCardWrapper>
-      <ImageLink to={link}>
+    return <MovieCardWrapper>
+      <ImageLink to={movieLink}>
       <ImageCard src={props.moviePhoto_src}></ImageCard>
       </ImageLink>
       <CardInfo>
@@ -38,19 +38,21 @@ import {
             <RatingCircle variant="determinate" value={props.movieRating * 10} />
           </RatingWrapper>
           <MovieNameWrapper>
-            <Link to={link}>
+            <Link to={movieLink}>
             <CardMovieName variant="h6" component="div">{props.movieName}</CardMovieName>
             </Link>
             <CardMovieDate variant="subtitle1" component="div">{date}</CardMovieDate>
           </MovieNameWrapper>
         </MovieHighlightWrapper>
+        <Link to={movieLink}>
         <MovieDescriptionText> {props.movieDescription}</MovieDescriptionText>
+        </Link>
       </CardInfo>
       <IconWrapper>
       <FavoriteRemoveIcon  onClick={removeFromFavoriteList}/>
       </IconWrapper>
   
-    </FavoriteMovieCardWrapper>
+    </MovieCardWrapper>
   };
   
   
