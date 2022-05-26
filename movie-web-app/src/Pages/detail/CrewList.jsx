@@ -3,30 +3,35 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
 import tmdbApi from "../../api/tmdbApi";
-
-import Actor from "./Actor";
+import apiConfig from "../../api/apiConfig";
 import { SwiperSlide, Swiper } from "swiper/react";
-
-const CastList = (props) => {
+const CrewList = (props) => {
   const { category } = useParams();
-
-  const [casts, setCasts] = useState([]);
-
+  const [crews, setCrews] = useState([]);
   useEffect(() => {
     const getCredits = async () => {
       const res = await tmdbApi.credits(category, props.id);
-      setCasts(res.cast.slice(0, 20));
+      setCrews(res.crew.slice(0, 10));
     };
-    if (category != "actor") getCredits();
+    if (category != "crew") getCredits();
   }, [category, props.id]);
+
   return (
     <div className="casts">
-      {casts.length > 0 && (
+      {crews.length > 0 && (
         <Swiper grabCursor={true} spaceBetween={8} slidesPerView={"auto"}>
-          {casts.map((item, i) => (
+          {crews.map((item, i) => (
             <SwiperSlide>
               <div key={i} className="casts__item">
-                <Actor item={item} />
+                <div
+                  className="casts__item__img"
+                  style={{
+                    backgroundImage: `url(${apiConfig.w500Image(
+                      item.profile_path
+                    )})`,
+                  }}
+                ></div>
+                <p className="casts__item__name">{item.name}</p>
               </div>
             </SwiperSlide>
           ))}
@@ -36,4 +41,4 @@ const CastList = (props) => {
   );
 };
 
-export default CastList;
+export default CrewList;
