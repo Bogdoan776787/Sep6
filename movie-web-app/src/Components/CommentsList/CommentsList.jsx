@@ -2,8 +2,12 @@ import { Typography } from "@material-ui/core";
 import React, { useEffect,useState } from "react";
 import styled from "styled-components";
 import { OutlineButton } from "./../button/Button";
+import { useParams } from "react-router";
+
 
 const Comment = (props) => {
+    const { category,id } = useParams();
+
     const [index,setIndex] = useState(5);
     const [comments,setComments] = useState([]);
     let list = props.list;
@@ -41,12 +45,12 @@ const Comment = (props) => {
         })}
         {
             list.length === 0 &&
-            <Typography variant = "h4">No discussion is started for this movie</Typography>
+            <Typography variant = "h4">No discussion is started for this {category ==="movie"? "movie": "TV show"}</Typography>
         }
         {list.length > index &&  list.length !== 0 &&
       <OutlineButton className="small" onClick={()=>handleClick(index + 4)}>
             Load more
-        </OutlineButton>
+    </OutlineButton>
     }
     </Wrapper>
   );
