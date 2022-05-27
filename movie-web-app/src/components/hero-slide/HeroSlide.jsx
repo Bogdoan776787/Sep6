@@ -92,7 +92,7 @@ const HeroSlideItem = (props) => {
 
     const videos = await tmdbApi.getVideos(category.movie, item.id);
     let video = videos.results.find((video) => video.type === "Trailer");
-    console.log(video)
+    
 
     if (videos.results.length > 0) {
       const videSrc = "https://www.youtube.com/embed/" + video.key;
@@ -131,7 +131,7 @@ const HeroSlideItem = (props) => {
 const TrailerModal = (props) => {
   const item = props.item;
   const [modal, setModal] = useState(false);
-  console.log(item.id)
+  
   const modalElement = document.querySelector(`#modal_${item.id}`);
   
 

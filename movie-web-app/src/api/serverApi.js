@@ -74,8 +74,8 @@ const serverApi = {
 
     },
 
-    getCommentsForMovie(movieId) {
-        const url = serverIP + "/Stage/comments?movieId=" + movieId
+    getCommentsForMovie(movieId,movieType) {
+        const url = serverIP + "/Stage/comments?movieId=" + movieId + "&type=" + movieType
         return axios.get(url)
     },
 

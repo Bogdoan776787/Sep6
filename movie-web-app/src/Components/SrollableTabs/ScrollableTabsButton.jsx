@@ -54,7 +54,7 @@ const  ScrollableTabsButtonAuto = ({Trailer,Casts,Crew,Comments,Ratings,Others})
           {Crew}
         </TabPanel>
         <TabPanel value={value} index={3}>
-          Comments
+          {Comments}
         </TabPanel>
         <TabPanel value={value} index={4}>
           Others

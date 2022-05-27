@@ -18,7 +18,7 @@ def lambda_handler(event, context):
     table = db.Table("Comments")
     table.put_item(
         Item={
-            "CommentId ":str(id_db),
+            "CommentId":str(id_db),
             "MovieId":body_params["movieId"],
             "UserId":body_params["userId"],
             "type":body_params["type"],

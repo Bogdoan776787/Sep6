@@ -22,6 +22,7 @@ import { CircularProgress, Typography } from "@material-ui/core";
 import styled from "styled-components";
 import CrewList from "./CrewList";
 import ScrollableTabsButtonAuto from "../../Components/SrollableTabs/ScrollableTabsButton";
+import CommentTab from "./../../Components/CommentTab/CommentTab";
 
 import { useSelector } from 'react-redux'
 
@@ -224,7 +225,11 @@ const Detail = () => {
 
           <div className="container">
             <div className="section mb-3">
-              <ScrollableTabsButtonAuto Trailer={<VideoList id={item.id} />} Casts={<CastList id={item.id} />} Crew={<CrewList id={item.id} />} />
+              <ScrollableTabsButtonAuto 
+              Trailer={<VideoList id={item.id} />} 
+              Casts={<CastList id={item.id} />} 
+              Crew={<CrewList id={item.id} />} 
+              Comments={<CommentTab/>} />
             </div>
             <div className="section mb-3">
               <div className="section__header mb-2">
