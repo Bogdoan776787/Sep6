@@ -181,7 +181,7 @@ const Detail = () => {
                   ))}
               </div>
               <p className="overview">{item.overview}</p>
-              <Action>
+              <Action logged = {(user.data === null).toString()}>
                 <RatingWrapper>
                   <RatingNumber>{movieRating * 1}</RatingNumber>
                   <RatingCircle
@@ -190,32 +190,35 @@ const Detail = () => {
                   />
                 </RatingWrapper>
                 <Vote>{item.vote_count}</Vote>
-                <ButtonAdd onClick={() => sendWatchList(!watched)}>
-                  {!watched && <WatchListAddIcon />}
-                  {watched && <WatchListRemoveIcon />}
-                </ButtonAdd>
-                <ButtonAdd onClick={() => sendFavorite(!favorite)}>
-                  {!favorite && <FavoriteAddIcon />}
-                  {favorite && <FavoriteRemoveIcon />}
-                </ButtonAdd>
+                {user.data && (
+                  <ButtonAdd onClick={() => sendWatchList(!watched)}>
+                    {!watched && <WatchListAddIcon />}
+                    {watched && <WatchListRemoveIcon />}
+                  </ButtonAdd>)}
+                {user.data && (
+                  <ButtonAdd onClick={() => sendFavorite(!favorite)}>
+                    {!favorite && <FavoriteAddIcon />}
+                    {favorite && <FavoriteRemoveIcon />}
+                  </ButtonAdd>)}
               </Action>
-              <RaitingPosition>
-                <Typography variant="h6">Rate:</Typography>
-                <RatingBox
-                  sx={{
-                    "& > legend": { mt: 2 },
-                  }}
-                >
-                  <StyledRating name="customized-color"
-                    value={rating}
-                    onChange={(event, newValue) => {
-
-                      sendRating(newValue)
+              {user.data && (
+                <RaitingPosition>
+                  <Typography variant="h6">Rate:</Typography>
+                  <RatingBox
+                    sx={{
+                      "& > legend": { mt: 2 },
                     }}
-                    max={10} size="large" />
-                </RatingBox>
-              </RaitingPosition>
+                  >
+                    <StyledRating name="customized-color"
+                      value={rating}
+                      onChange={(event, newValue) => {
 
+                        sendRating(newValue)
+                      }}
+                      max={10} size="large" />
+                  </RatingBox>
+                </RaitingPosition>
+              )}
             </div>
           </div>
 
@@ -265,7 +268,7 @@ export const RatingNumber = styled.span`
   z-index: 2;
 `;
 export const Action = styled.div`
-  width: 400px;
+  width:${(props) => (props.logged==="false" ? '400px' : '200px')};
   justify-content: space-around;
   display: flex;
   flex-direction:row;
