@@ -14,7 +14,7 @@ def lambda_handler(event, context):
 
     table = db.Table("Comments")
     response = table.scan(
-    FilterExpression=Attr('MovieId').eq(query_params["movieId"])
+    FilterExpression=Attr('MovieId').eq(query_params["movieId"]) & Attr('type').eq(query_params["type"])
     )
 
     return {

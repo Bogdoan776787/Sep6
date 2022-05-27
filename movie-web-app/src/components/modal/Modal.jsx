@@ -8,7 +8,7 @@ const Modal = props => {
     const [active, setActive] = useState(false);
     
     useEffect(() => {
-        console.log(props)
+        
         setActive(props.active);
     }, [props.active]);
 
@@ -29,7 +29,7 @@ export const ModalContent = props => {
     const contentRef = useRef(null);
 
     const closeModal = () => {
-        console.log("CLOSE MODEL")
+        
         contentRef.current.parentNode.classList.remove('active');
         if (props.onClose) props.onClose();
     }
