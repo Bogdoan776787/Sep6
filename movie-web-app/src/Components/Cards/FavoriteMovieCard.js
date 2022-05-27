@@ -20,6 +20,10 @@ import {
   
   const FavoriteMovieCard = (props) => {
     const movieLink = "/" + props.type + "/" +  props.movieId
+    const round = (num) => {
+      var m = Number((Math.abs(num) * 100).toPrecision(15));
+      return Math.round(m) / 100 * Math.sign(num);
+    }
     const removeFromFavoriteList = async () =>
     {
       props.removeFromList(props.FavoriteId);
@@ -34,8 +38,8 @@ import {
       <CardInfo>
         <MovieHighlightWrapper>
           <RatingWrapper >
-            <RatingNumber>{props.movieRating * 10}</RatingNumber>
-            <RatingCircle variant="determinate" value={props.movieRating * 10} />
+            <RatingNumber>{round(props.movieRating) }</RatingNumber>
+            <RatingCircle variant="determinate" value={round(props.movieRating) * 10} />
           </RatingWrapper>
           <MovieNameWrapper>
             <Link to={movieLink}>

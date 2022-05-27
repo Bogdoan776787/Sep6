@@ -25,7 +25,7 @@ const HeroSlide = () => {
         const response = await tmdbApi.getMoviesList(movieType.popular, {
           params,
         });
-        setMovieItems(response.results.slice(0, 4));
+        setMovieItems(response.results.slice(0, 10));
         
       } catch {
         
@@ -91,9 +91,11 @@ const HeroSlideItem = (props) => {
     const modal = document.querySelector(`#modal_${item.id}`);
 
     const videos = await tmdbApi.getVideos(category.movie, item.id);
+    let video = videos.results.find((video) => video.type === "Trailer");
+    console.log(video)
 
     if (videos.results.length > 0) {
-      const videSrc = "https://www.youtube.com/embed/" + videos.results[0].key;
+      const videSrc = "https://www.youtube.com/embed/" + video.key;
       modal
         .querySelector(".modal__content > iframe")
         .setAttribute("src", videSrc);
@@ -128,14 +130,34 @@ const HeroSlideItem = (props) => {
 
 const TrailerModal = (props) => {
   const item = props.item;
+  const [modal, setModal] = useState(false);
+  console.log(item.id)
+  const modalElement = document.querySelector(`#modal_${item.id}`);
+  
 
   const iframeRef = useRef(null);
+  const close = () => {
+    iframeRef.current.setAttribute("src", "")
+    document.getElementById(`modal_${item.id}`).classList.remove("active");
+  };
+  useEffect(() => {
 
-  const onClose = () => iframeRef.current.setAttribute("src", "");
+    const handleClickOutside = (event) => {
+      if (iframeRef.current && !iframeRef.current.contains(event.target)) {
+        close && close();
+      }
+    };
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, [ close ]);
+
+
 
   return (
-    <Modal active={false} id={`modal_${item.id}`}>
-      <ModalContent onClose={onClose}>
+    <Modal active={modal} id={`modal_${item.id}`} onClose={close} >
+      <ModalContent >
         <iframe
           ref={iframeRef}
           width="100%"

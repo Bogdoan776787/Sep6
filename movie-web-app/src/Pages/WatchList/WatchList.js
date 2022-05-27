@@ -11,14 +11,14 @@ const WatchListComponent = () => {
   const [currentShows,setCurrentShows] = useState([])
   const [responseStatus,setResponseStatus] = useState(0)
 
-  console.log("load")
+  
   useEffect(() => {
     const getList = async () => {
       let response = await serverApi.getWatchList(localStorage.getItem("user"));
       setResponseStatus(response.status)
       setMovies(response.data);
       setShows("movie",response.data)
-      console.log("render")
+      
     }
     getList();
   }, []);

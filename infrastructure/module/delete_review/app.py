@@ -8,11 +8,11 @@ db = boto3.resource('dynamodb')
 
 def lambda_handler(event, context):
     status_code = 200
-    body_params = json.loads(event["body"])
+    body_params = event["queryStringParameters"]
     text_message="SUCCESS"
     table = db.Table("Reviews")
-    table.deleteItem(
-        Item={
+    table.delete_item(
+        Key={
             "ReviewId":body_params["reviewId"]
         }
     )

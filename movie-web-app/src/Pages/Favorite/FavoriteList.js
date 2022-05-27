@@ -14,7 +14,7 @@ const FavoriteListComponent = () => {
     const getList = async () => {
       let response = await serverApi.getFavoriteShows(localStorage.getItem("user"));
       setResponseStatus(response.status)
-      console.log(movies.length === 0 && response.status === 200)
+      
       setMovies(response.data);
       setShows("movie",response.data)
     }
@@ -23,7 +23,7 @@ const FavoriteListComponent = () => {
   const removeDataFromList = async (FavoriteId) => {
     await serverApi.removeFromFavorite(FavoriteId)
     let newMovies = movies.filter(movie => movie.FavoriteId !== FavoriteId)
-    console.log(newMovies)
+    
     setMovies(newMovies);
     setShows(listType,newMovies)
   }
@@ -58,7 +58,7 @@ const FavoriteListComponent = () => {
     />
     }
     {
-      movies.length === 0 && responseStatus === 200 &&
+      currentShows.length === 0 && responseStatus === 200 &&
       <NotFoundText variant = "h5">You haven't added any {listType === "movie"? "movies" : "TV shows"}  as favorites.</NotFoundText>
     }
   </FavoriteBackground>;

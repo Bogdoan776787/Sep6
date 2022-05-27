@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./movie-card.scss";
-import { TextField, Typography, CircularProgress } from "@material-ui/core";
+import { CircularProgress } from "@material-ui/core";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -14,11 +14,14 @@ const MovieCard = (props) => {
   const link = "/" + category[props.category] + "/" + item.id;
 
   const bg = apiConfig.w500Image(item.poster_path || item.backdrop_path);
-
+  const round = (num) => {
+    var m = Number((Math.abs(num) * 100).toPrecision(15));
+    return Math.round(m) / 100 * Math.sign(num);
+  }
   return (
     <Link to={link}>
       <RatingWrapper>
-        <RatingNumber>{item.vote_average * 10}</RatingNumber>
+        <RatingNumber>{round(item.vote_average)}</RatingNumber>
         <RatingCircle variant="determinate" value={item.vote_average * 10} />
       </RatingWrapper>
       <div

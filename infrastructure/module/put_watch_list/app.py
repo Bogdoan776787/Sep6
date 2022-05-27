@@ -36,6 +36,9 @@ def lambda_handler(event, context):
             "Access-Control-Allow-Methods": "GET"  
         },
         "body": json.dumps({
-            "message": text_message
+            "listId":str(id_db),
+            "movieId":body_params["movieId"],
+            "userId":body_params["userId"],
+            "type":body_params["type"],
         }),
     }

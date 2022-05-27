@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {  Typography, CircularProgress } from "@material-ui/core";
-import { ReactComponent as Icon } from "./../../assets/unstar.svg"
-import { ReactComponent as watchedIcon } from "./../../assets/watchedSvg.svg"
+import { ReactComponent as Icon } from "./../../assets/heart-remove.svg"
+import { ReactComponent as watchedIcon } from "./../../assets/eye-minus.svg"
 import { Link } from "react-router-dom";
 
 
@@ -118,7 +118,7 @@ export const IconWrapper = styled.div`
 export const FavoriteRemoveIcon = styled(Icon)
     `
     fill: white;
-    height: 25px;
+    height: 35px;
     &:hover
     {
         fill:#803bec;
@@ -128,7 +128,7 @@ export const FavoriteRemoveIcon = styled(Icon)
 export const WatchedIcon = styled(watchedIcon)
     `
     fill: white;
-    height: 20px;
+    height: 40px;
     &:hover
     {
         fill:#803bec;

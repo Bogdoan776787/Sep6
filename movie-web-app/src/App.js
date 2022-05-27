@@ -50,9 +50,6 @@ function App() {
       <Pages>
         <AnimatePresence exitBeforeEnter>
           <Routes>
-
-
-
             <Route path="/" element={<Home />} />
             <Route path="/:category/search/:keyword" element={<Catalog />} />
             <Route path="/:category/:id" element={<Detail />} />
@@ -60,7 +57,6 @@ function App() {
             <Route path="/actor/:id" element={<ActorDetail />} />
             <Route path="/favorite" element={<PrivateRoute><Favorite/></PrivateRoute>} />
             <Route path="/watch-list" element={<PrivateRoute><WatchList/></PrivateRoute>} />
-
              <Route path="/login" element={
               <PublicRoute><Login/></PublicRoute>
             } />

@@ -24,22 +24,22 @@ const WatchMovieCard = (props) => {
     props.removeFromList(props.listId);
   }
 
-  const navigateToDetails = () =>
-  {
-
+  const round = (num) => {
+    var m = Number((Math.abs(num) * 100).toPrecision(15));
+    return Math.round(m) / 100 * Math.sign(num);
   }
   let date = props.movieReleaseData
   date = new Date(date)
   date = date.toDateString()
-  return <MovieCardWrapper onClick={()=>console.log()}>
+  return <MovieCardWrapper>
     <ImageLink to={link}>
-    <ImageCard src={props.moviePhoto_src} onClick={navigateToDetails} alt={props.movieName}></ImageCard>
+    <ImageCard src={props.moviePhoto_src} alt={props.movieName}></ImageCard>
     </ImageLink>
     <CardInfo>
       <MovieHighlightWrapper>
         <RatingWrapper >
-          <RatingNumber>{props.movieRating * 10}</RatingNumber>
-          <RatingCircle variant="determinate" value={props.movieRating * 10} />
+          <RatingNumber>{round(props.movieRating) }</RatingNumber>
+          <RatingCircle variant="determinate" value={round(props.movieRating) * 10} />
         </RatingWrapper>
         <MovieNameWrapper>
           <Link to={link}>
