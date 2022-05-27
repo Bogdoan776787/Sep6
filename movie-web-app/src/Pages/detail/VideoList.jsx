@@ -1,3 +1,4 @@
+import { Typography } from "@material-ui/core";
 import React, { useState, useEffect, useRef } from "react";
 
 import { useParams } from "react-router";
@@ -23,6 +24,7 @@ const VideoList = (props) => {
       {videos.map((item, i) => (
         <Video key={i} item={item} />
       ))}
+      {videos.length===0 && <Typography variant="h5">No trailer available for this {category === "movie"? "movie" : "TV show"}</Typography>}
     </>
   );
 };
@@ -31,6 +33,7 @@ const Video = (props) => {
   const item = props.item;
 
   const iframeRef = useRef(null);
+
 
   useEffect(() => {
     const height = (iframeRef.current.offsetWidth * 9) / 16 + "px";
