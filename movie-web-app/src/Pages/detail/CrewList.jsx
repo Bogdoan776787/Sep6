@@ -4,16 +4,21 @@ import { useParams } from "react-router";
 
 import tmdbApi from "../../api/tmdbApi";
 import apiConfig from "../../api/apiConfig";
-import { SwiperSlide, Swiper } from "swiper/react";
-import NoProfilePicture from "././../../assets/no-profile-picture.png";
+import NoProfilePicture from "././../../assets/no-profile-picture.jpg";
 
 const CrewList = (props) => {
   const { category } = useParams();
   const [crews, setCrews] = useState([]);
+  const [index,setIndex] = useState(12);
+  const [showCrew,setShowCrew] = useState([]);
   useEffect(() => {
     const getCredits = async () => {
       const res = await tmdbApi.credits(category, props.id);
-      setCrews(res.crew);
+      console.log(res.crew)
+      let crew = res.crew.filter((item,index) => index!==0 && item.id!==res.crew[index-1].id);
+      setCrews(crew);
+
+      console.log(res.crew)
     };
     if (category != "crew") getCredits();
   }, [category, props.id]);
@@ -21,9 +26,9 @@ const CrewList = (props) => {
   return (
     <div className="casts">
       {crews.length > 0 && (
-        <Swiper grabCursor={true} spaceBetween={8} slidesPerView={"auto"}>
+        <div className="casts-list">
           {crews.map((item, i) => (
-            <SwiperSlide key={i}>
+            <div className="cast" key={i}>
               <div  className="casts__item">
                 <div
                   className="casts__item__img"
@@ -33,9 +38,10 @@ const CrewList = (props) => {
                 ></div>
                 <p className="casts__item__name">{item.name}</p>
               </div>
-            </SwiperSlide>
+            </div>
           ))}
-        </Swiper>
+        </div>
+        
       )}
     </div>
   );

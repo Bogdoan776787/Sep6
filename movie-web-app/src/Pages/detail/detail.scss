@@ -63,7 +63,7 @@
             padding-left: 0;
         }
 
-        & > * {
+        &>* {
             margin-bottom: 2rem;
         }
 
@@ -73,7 +73,7 @@
         }
 
         .genres {
-            & > * ~ * {
+            &>*~* {
                 margin-left: 0.5rem;
             }
 
@@ -90,17 +90,26 @@
 }
 
 .casts {
-   .swiper-slide{
-       width:15%;
-   }
+    .casts-list {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .cast {
+        width: 15%;
+        margin-bottom:20px;
+        margin-right: 14px;
+    }
 
     &__item {
         &__img {
-            padding-top: 160px;
+            padding-top: 150%;
             background-size: cover;
             margin-bottom: 0.5rem;
         }
-      
+
 
         &__name {
             font-size: 0.8rem;
@@ -116,6 +125,6 @@
     }
 }
 
-.casts__item__img:hover{
+.casts__item__img:hover {
     opacity: 0.5;
 }

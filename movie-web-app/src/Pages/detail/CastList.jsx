@@ -5,7 +5,6 @@ import { useParams } from "react-router";
 import tmdbApi from "../../api/tmdbApi";
 
 import Actor from "./Actor";
-import { SwiperSlide, Swiper } from "swiper/react";
 
 const CastList = (props) => {
   const { category } = useParams();
@@ -22,15 +21,15 @@ const CastList = (props) => {
   return (
     <div className="casts">
       {casts.length > 0 && (
-        <Swiper grabCursor={true} spaceBetween={8} slidesPerView={"auto"}>
+        <div className="casts-list">
           {casts.map((item, i) => (
-            <SwiperSlide key={i}>
+            <div className="cast" key={i}>
               <div  className="casts__item">
                 <Actor item={item} />
               </div>
-            </SwiperSlide>
+            </div>
           ))}
-        </Swiper>
+        </div>
       )}
     </div>
   );
