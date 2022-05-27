@@ -2,7 +2,7 @@ import React from "react";
 import apiConfig from "../../api/apiConfig";
 import { actor } from "../../api/tmdbApi";
 import { Link } from "react-router-dom";
-import NoProfilePicture from "././../../assets/no-profile-picture.png";
+import NoProfilePicture from "././../../assets/no-profile-picture.jpg";
 const Actor = (props) => {
   const item = props.item;
   const link = "/" + actor["actor"] + "/" + item.id;
