@@ -15,7 +15,7 @@ def lambda_handler(event, context):
     status_code = 200
     body_params = json.loads(event["body"])
     text_message="SUCCESS"
-    table = db.Table("Favorite")
+    table = db.Table("Favorites")
     table.put_item(
         Item={
             "FavoriteId":str(id_db),
@@ -36,6 +36,10 @@ def lambda_handler(event, context):
             "Access-Control-Allow-Methods": "GET"  
         },
         "body": json.dumps({
-            "message": text_message
+            "FavoriteId":str(id_db),
+            "movieId":body_params["movieId"],
+            "userId":body_params["userId"],
+            #movie or tv series
+            "type":body_params["type"],
         }),
     }

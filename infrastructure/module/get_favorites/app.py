@@ -17,12 +17,9 @@ def lambda_handler(event, context):
     url = "https://api.themoviedb.org/3/TYPE/MOVIE_ID?api_key="+ api_external_key+ "&language=en-US"
     query_params = event["queryStringParameters"]
     if("movieId" in query_params.keys()):
-        response = getMovieFromWatchListTable(query_params["userId"],query_params["movieId"])
+        response = getMovieFromWatchListTable(query_params["userId"],query_params["movieId"],query_params["type"])
         print(response)
-        items = {
-            "message": True if len(response)>0 else False
-        }
-    
+        items =response
     else:
         items = getWatchListTable(query_params["userId"])
 
@@ -33,7 +30,7 @@ def lambda_handler(event, context):
             movieTitleTag = "title" if item["type"] == "movie"  else "name"
             releaseDate = "release_date" if item["type"] == "movie"  else "first_air_date"
             resp = requests.get(movieUrl).json()
-            item["movieRating"] = resp["vote_average"]
+            item["movieRating"] = getRating(item["movieId"],resp["vote_average"],resp["vote_count"])
             item["movieName"] = resp[movieTitleTag]
             item["movieDescription"] = resp["overview"]
             item["moviePhoto_src"] =  "https://image.tmdb.org/t/p/w600_and_h900_bestv2" + resp["poster_path"]
@@ -51,16 +48,29 @@ def lambda_handler(event, context):
 
 
 def getWatchListTable(userId):
-    table = db.Table("Favorite")
+    table = db.Table("Favorites")
     response = table.scan(
     FilterExpression=Attr('userId').eq(userId)
     )
     return response["Items"]
     
 
-def getMovieFromWatchListTable(userId,movieId):
-    table = db.Table("Favorite")
+def getMovieFromWatchListTable(userId,movieId,movieType):
+    table = db.Table("Favorites")
     response = table.scan(
-        FilterExpression=Attr('userId').eq(userId) & Attr('movieId').eq(movieId)
+        FilterExpression=Attr('userId').eq(userId) & Attr('movieId').eq(movieId) & Attr('type').eq(movieType)
     )
     return response["Items"]
+
+
+def getRating(movieId,rating,nrOfVotes):
+    table = db.Table("Reviews")
+    response = table.scan(
+        FilterExpression=Attr('MovieId').eq(movieId)
+    )
+    new_rating = rating*nrOfVotes
+    for k in response["Items"]:
+        new_rating += int(k["MovieRating"])
+    new_rating = new_rating/(len(response["Items"]) + nrOfVotes)
+    return new_rating;
+    

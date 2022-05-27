@@ -5,19 +5,18 @@ import { useParams } from "react-router";
 import tmdbApi from "../../api/tmdbApi";
 
 const VideoList = (props) => {
-  const { category } = useParams();
+  const { category,id } = useParams();
 
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
     const getVideos = async () => {
-      
-      const res = await tmdbApi.getVideos(category, props.id);
-      setVideos(res.results.slice(0, 1));
+      const res = await tmdbApi.getVideos(category, id);
+      setVideos(res.results.filter(video => video.type === "Trailer").slice(0,1));
     };
-    if(category!="actor")
+    if(category!=="actor")
       getVideos();
-  }, [category, props.id]);
+  }, [category, id]);
 
   return (
     <>

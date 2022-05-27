@@ -11,13 +11,12 @@ def lambda_handler(event, context):
     status_code = 200
     text_message="SUCCESS"
     query_params = event["queryStringParameters"]
-
+    items = dict()
+    items["Reviews"] = getReviews(query_params["movieId"],query_params["type"])
     if("userId" in query_params.keys()):
-        response = getReview(query_params["movieId"], query_params["userId"])
-        items = response
-    else:
-        items = getReviews(query_params["movieId"])
-
+            response = getReview(query_params["movieId"], query_params["userId"],query_params["type"])
+            items["userReview"] = response;
+    print(items)
     return {
         "statusCode": status_code,
         "headers": {
@@ -29,16 +28,16 @@ def lambda_handler(event, context):
     }
 
 
-def getReviews(movieId):
+def getReviews(movieId,movieType):
     table = db.Table("Reviews")
     response = table.scan(
-    FilterExpression=Attr('MovieId').eq(movieId)
+    FilterExpression=Attr('MovieId').eq(movieId) & Attr('type').eq(movieType)
     )
     return response["Items"]
 
-def getReview(movieId,userId):
+def getReview(movieId,userId,movieType):
     table = db.Table("Reviews")
     response = table.scan(
-    FilterExpression=Attr('MovieId').eq(movieId) & Attr('UserId').eq(userId)
+    FilterExpression=Attr('MovieId').eq(movieId) & Attr('UserId').eq(userId)& Attr('type').eq(movieType)
     )
     return response["Items"]

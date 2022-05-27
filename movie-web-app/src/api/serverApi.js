@@ -1,21 +1,21 @@
 import axios from 'axios';
 
-
+const serverIP = "https://dt3tv45peg.execute-api.eu-central-1.amazonaws.com"
 const serverApi = {
     //WATCH LIST APIs
     getWatchList(userId) {
-        const url = "https://wtdmb0rn8g.execute-api.eu-central-1.amazonaws.com/Stage/watch-list?userId=" + userId
-        console.log(url)
+        const url = serverIP + "/Stage/watch-list?userId=" + userId
+        
         return axios.get(url);
     },
     removeFromWatchList(listId) {
-        const url = "https://wtdmb0rn8g.execute-api.eu-central-1.amazonaws.com/Stage/watch-list?listId=" + listId
-        console.log(url)
+        const url = serverIP + "/Stage/watch-list?listId=" + listId
+        
         return axios.delete(url);
     },
     addToWatchList(userId, movieId, type) {
         //Type should be either tv or movie
-        const url = "https://wtdmb0rn8g.execute-api.eu-central-1.amazonaws.com/Stage/watch-list"
+        const url =serverIP +"/Stage/watch-list"
         let data = {
             userId: userId,
             movieId: movieId,
@@ -24,38 +24,45 @@ const serverApi = {
         return axios.put(url, data);
     },
     getOneFromWatchList(userId, movieId, type) {
-        const url = "https://wtdmb0rn8g.execute-api.eu-central-1.amazonaws.com/Stage/watch-list?userId=" + userId + "&movieId=" + movieId + "&type=" + type
+        const url = serverIP + "/Stage/watch-list?userId=" + userId + "&movieId=" + movieId + "&type=" + type
         return axios.get(url);
     },
 
     //Reviews APIs
-    putReviewForMovie(userId, movieId, type, movieRating, ratingComment) {
-        const url = "https://wtdmb0rn8g.execute-api.eu-central-1.amazonaws.com/Stage/reviews"
+    putReviewForMovie(userId, movieId, type, movieRating) {
+        
+        const url = serverIP + "/Stage/reviews"
         let data =
         {
             userId: userId,
             movieId: movieId,
             type: type,
-            movieRating: movieRating,
-            ratingComment: ratingComment
+            movieRating: movieRating.toString(),
+            ratingComment: ""
         }
         return axios.put(url, data);
     },
 
     getReviewsForMovie(movieId) {
-        const url = "https://wtdmb0rn8g.execute-api.eu-central-1.amazonaws.com/Stage/reviews?movieId=" + movieId
+        const url = serverIP + "/Stage/reviews?movieId=" + movieId
         return axios.get(url)
     },
 
-    getReviewForMovieByUser(movieId, userId) {
-        const url = "https://wtdmb0rn8g.execute-api.eu-central-1.amazonaws.com/Stage/reviews?movieId=" + movieId + "&userId=" + userId
+    getReviewForMovieByUser(userId, movieId,movieType) {
+        const url = serverIP + "/Stage/reviews?movieId=" + movieId + "&userId=" + userId + "&type=" + movieType
+        
         return axios.get(url)
+    },
+    deleteReview(id)
+    {
+        const url = serverIP + "/Stage/reviews?reviewId=" + id
+        return axios.delete(url)
     },
 
 
     //Comments APIs
     putCommentForMovie(movieId, userId, type, commentText) {
-        const url = "https://wtdmb0rn8g.execute-api.eu-central-1.amazonaws.com/Stage/comments"
+        const url = serverIP + "/Stage/comments"
         let data =
         {
             movieId: movieId,
@@ -68,7 +75,7 @@ const serverApi = {
     },
 
     getCommentsForMovie(movieId) {
-        const url = "https://wtdmb0rn8g.execute-api.eu-central-1.amazonaws.com/Stage/comments?movieId=" + movieId
+        const url = serverIP + "/Stage/comments?movieId=" + movieId
         return axios.get(url)
     },
 
@@ -76,18 +83,18 @@ const serverApi = {
 
     //Favorite APIs
     getFavoriteShows(userId) {
-        const url = "https://wtdmb0rn8g.execute-api.eu-central-1.amazonaws.com/Stage/favorite?userId=" + userId
-        console.log(url)
+        const url = serverIP + "/Stage/favorites?userId=" + userId
+        
         return axios.get(url);
     },
     removeFromFavorite(favoriteId) {
-        const url = "https://wtdmb0rn8g.execute-api.eu-central-1.amazonaws.com/Stage/favorite?favoriteId=" + favoriteId
-        console.log(url)
+        const url = serverIP + "/Stage/favorites?favoriteId=" + favoriteId
+        
         return axios.delete(url);
     },
     addShowToFavorite(userId, movieId, type) {
         //Type should be either tv or movie
-        const url = "https://wtdmb0rn8g.execute-api.eu-central-1.amazonaws.com/Stage/favorite"
+        const url = serverIP + "/Stage/favorites"
         let data = {
             userId: userId,
             movieId: movieId,
@@ -96,7 +103,8 @@ const serverApi = {
         return axios.put(url, data);
     },
     getOneShowFromFavorite(userId, movieId, type) {
-        const url = "https://wtdmb0rn8g.execute-api.eu-central-1.amazonaws.com/Stage/watch-list?favorite=" + userId + "&movieId=" + movieId + "&type=" + type
+        
+        const url = serverIP + "/Stage/favorites?userId=" + userId + "&movieId=" + movieId + "&type=" + type
         return axios.get(url);
     },
 }

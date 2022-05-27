@@ -3,33 +3,149 @@ import { useParams } from "react-router";
 
 import tmdbApi from "../../api/tmdbApi";
 import apiConfig from "../../api/apiConfig";
+import serverApi from "./../../api/serverApi";
+
 
 import "./detail.scss";
 import CastList from "./CastList";
 import VideoList from "./VideoList";
-import ButtonFavorite from "../../assets/favorite-button-svgrepo-com.svg";
-import addTWL from "../../assets/add1.svg";
+import { ReactComponent as WatchListAdd } from "../../assets/eyeAdd.svg";
+import { ReactComponent as WatchListRemove } from "../../assets/eye-minus.svg"
+import Box from "@mui/material/Box";
+import Rating from "@mui/material/Rating";
+
 import MovieList from "../../Components/movie-list/MovieList";
-import { TextField, Typography, CircularProgress } from "@material-ui/core";
+import { ReactComponent as FavoriteAdd } from "../../assets/heart-add.svg"
+import { ReactComponent as FavoriteRemove } from "../../assets/heart-remove.svg"
+
+import { CircularProgress, Typography } from "@material-ui/core";
 import styled from "styled-components";
 import CrewList from "./CrewList";
-import Comment from "../../Components/Comment/Comment";
-import Raiting from "../../Components/Raiting/Raiting";
-import Review from "../../Components/Review/Review";
+import ScrollableTabsButtonAuto from "../../Components/SrollableTabs/ScrollableTabsButton";
+
+import { useSelector } from 'react-redux'
+
 const Detail = () => {
   const { category, id } = useParams();
+  const [rating, setRating] = useState(0);
+  const [movieRating, setMovieRating] = useState(0);
+  const [favorite, setFavorite] = useState(false);
+  const [favoriteData, setFavoriteData] = useState({});
 
+  const [watched, setWatched] = useState(false);
+  const [watchData, setWatchData] = useState({});
+
+  let user = useSelector(state => state.user)
+  const [userReviewMovie, setUserReviewMovie] = useState({});
   const [item, setItem] = useState(null);
-  console.log(item);
+
+  const round = (num) => {
+    var m = Number((Math.abs(num) * 100).toPrecision(15));
+    return Math.round(m) / 100 * Math.sign(num);
+  }
+
+
   useEffect(() => {
     const getDetail = async () => {
+
       const response = await tmdbApi.detail(category, id, { params: {} });
       setItem(response);
+      setMovieRating(response.vote_average)
+      getRating(response)
+
       window.scrollTo(0, 0);
     };
+    const getFavorite = async () => {
 
-    if (category != "actor") getDetail();
-  }, [category, id]);
+      let res = await serverApi.getOneShowFromFavorite(localStorage.getItem("user"), id, category)
+
+
+      if (res.data[0] !== undefined) {
+        setFavoriteData(res.data[0])
+        setFavorite(true)
+      }
+    }
+
+    const getWatchMovie = async () => {
+
+      let res = await serverApi.getOneFromWatchList(localStorage.getItem("user"), id, category)
+      if (res.data[0] !== undefined) {
+        setWatchData(res.data[0])
+        setWatched(true)
+      }
+    }
+
+    const getRating = async (data) => {
+      let res = await serverApi.getReviewForMovieByUser(localStorage.getItem("user"), id, category)
+      if (res.data.userReview.length > 0) {
+        setUserReviewMovie(res.data.userReview[0])
+        setRating(parseInt(res.data.userReview[0].MovieRating))
+        let reviews = res.data.Reviews;
+        let sum = 0;
+        reviews.forEach(review => {
+          sum += parseInt(review.MovieRating)
+        })
+        setMovieRating(round((data.vote_average * data.vote_count + sum) / (data.vote_count + reviews.length)))
+        data.vote_count += reviews.length;
+      }
+    }
+
+    if (category !== "actor") {
+      getFavorite();
+      getDetail();
+      getWatchMovie();
+    }
+  }, [category, id, favorite.length]);
+
+  const sendRating = async (value) => {
+    let newValue = item.vote_average
+
+    if (value === null) {
+
+      await (serverApi.deleteReview(userReviewMovie.ReviewId))
+      setRating(0);
+      setUserReviewMovie({})
+    }
+    else {
+      if (userReviewMovie.ReviewId !== undefined)
+        await (serverApi.deleteReview(userReviewMovie.ReviewId))
+      setRating(value)
+      let res = await (serverApi.putReviewForMovie(localStorage.getItem("user"), id, category, value))
+      setUserReviewMovie(res.data);
+    }
+    item.vote_count = value === null ? item.vote_count - 1 : (rating === 0 ? item.vote_count + 1 : item.vote_count);
+    setMovieRating(round(newValue));
+  }
+
+  const sendWatchList = async (value) => {
+
+    if (value === true) {
+      setWatched(true)
+      let resp = await serverApi.addToWatchList(user.data, id, category);
+
+      setWatchData(resp.data)
+
+    }
+    else {
+      setWatched(false)
+      await serverApi.removeFromWatchList(watchData.listId)
+    }
+  }
+
+  const sendFavorite = async (value) => {
+
+    if (value === true) {
+      setFavorite(true)
+      let resp = await serverApi.addShowToFavorite(user.data, id, category);
+
+      setFavoriteData(resp.data)
+    }
+    else {
+      setFavorite(false)
+      await serverApi.removeFromFavorite(favoriteData.FavoriteId)
+    }
+
+  }
 
   return (
     <>
@@ -67,46 +183,45 @@ const Detail = () => {
               <p className="overview">{item.overview}</p>
               <Action>
                 <RatingWrapper>
-                  <RatingNumber>{item.vote_average * 1}</RatingNumber>
+                  <RatingNumber>{movieRating * 1}</RatingNumber>
                   <RatingCircle
                     variant="determinate"
-                    value={item.vote_average * 10}
+                    value={movieRating * 10}
                   />
                 </RatingWrapper>
                 <Vote>{item.vote_count}</Vote>
-                <ButtonFavorit>
-                  <img src={ButtonFavorite} alt="" />
-                </ButtonFavorit>
-                <ButtonAdd>
-                  <img src={addTWL} alt="" />
+                <ButtonAdd onClick={() => sendWatchList(!watched)}>
+                  {!watched && <WatchListAddIcon />}
+                  {watched && <WatchListRemoveIcon />}
                 </ButtonAdd>
-                <RaitingPosition>
-                  <Raiting />
-                </RaitingPosition>
+                <ButtonAdd onClick={() => sendFavorite(!favorite)}>
+                  {!favorite && <FavoriteAddIcon />}
+                  {favorite && <FavoriteRemoveIcon />}
+                </ButtonAdd>
               </Action>
+              <RaitingPosition>
+                <Typography variant="h6">Rate:</Typography>
+                <RatingBox
+                  sx={{
+                    "& > legend": { mt: 2 },
+                  }}
+                >
+                  <StyledRating name="customized-color"
+                    value={rating}
+                    onChange={(event, newValue) => {
 
-              <div className="cast">
-                <div className="section__header">
-                  <h2>Casts</h2>
-                </div>
+                      sendRating(newValue)
+                    }}
+                    max={10} size="large" />
+                </RatingBox>
+              </RaitingPosition>
 
-                <CastList id={item.id} />
-              </div>
-              <div className="crew">
-                <div className="section__header">
-                  <h2>Crew</h2>
-                </div>
-
-                <CrewList id={item.id} />
-              </div>
             </div>
           </div>
 
           <div className="container">
             <div className="section mb-3">
-              <Comment />
-              <Review />
-              <VideoList id={item.id} />
+              <ScrollableTabsButtonAuto Trailer={<VideoList id={item.id} />} Casts={<CastList id={item.id} />} Crew={<CrewList id={item.id} />} />
             </div>
             <div className="section mb-3">
               <div className="section__header mb-2">
@@ -127,18 +242,15 @@ export const RatingCircle = styled(CircularProgress)`
   color: green !important;
   background-color: black;
   border-radius: 50%;
-  width: 50px !important;
-  height: 50px !important;
+  width: 70px !important;
+  height: 70px !important;
 `;
 
 export const RatingWrapper = styled.div`
   position: relative;
-  top: 60px;
-  left: 5px;
   display: flex;
-  display: flex;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   align-items: center;
   justify-content: center;
   z-index: 10;
@@ -153,27 +265,17 @@ export const RatingNumber = styled.span`
   z-index: 2;
 `;
 export const Action = styled.div`
-  position: relative;
-  bottom: 55px;
-  right: 240px;
+  width: 400px;
+  justify-content: space-around;
   display: flex;
-  display: grid;
-  row-gap: 2px;
-  grid-template-columns: auto auto auto auto auto;
+  flex-direction:row;
   align-items: center;
-  justify-content: center;
   @media screen {
-    min-width: 1000px;
-    position: relative;
-    bottom: 55px;
-    right: 290px;
+
   }
 `;
 
 export const Vote = styled.div`
-  position: relative;
-  top: 60px;
-  left: 15px;
   border: 4px solid rgb(103, 13, 163);
   border-radius: 50%;
   display: flex;
@@ -184,13 +286,11 @@ export const Vote = styled.div`
   background-color: black;
   font-weight: 900;
   font-size: 13px;
-  height: 50px;
-  width: 50px;
+  height: 70px;
+  width: 70px;
 `;
-export const ButtonFavorit = styled.button`
-  position: relative;
-  top: 60px;
-  left: 25px;
+export const ButtonRating = styled.button`
+  position:relative;
   border: 2px solid rgb(255, 255, 255);
   border-radius: 50%;
   display: flex;
@@ -200,19 +300,16 @@ export const ButtonFavorit = styled.button`
   padding: 2px;
   background-color: white;
 
-  height: 50px;
-  width: 50px;
+  height: 70px;
+  width: 70px;
   img {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
   }
 `;
 
 export const ButtonAdd = styled.button`
-  position: relative;
-  top: 60px;
-  left: 36px;
   border: 2px solid rgb(255, 255, 255);
   border-radius: 50%;
   display: flex;
@@ -222,16 +319,62 @@ export const ButtonAdd = styled.button`
   padding: 2px;
   background-color: white;
 
-  height: 50px;
-  width: 50px;
+  height: 70px;
+  width: 70px;
   img {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
   }
 `;
 export const RaitingPosition = styled.div`
-  position: relative;
-  left: 50px;
-  top: 50px;
+width:fit-content;
+margin-left:20px;
 `;
+
+
+export const FavoriteAddIcon = styled(FavoriteAdd)
+  `
+fill: black;
+width: 50px;
+height: 50px;
+`
+
+export const FavoriteRemoveIcon = styled(FavoriteRemove)
+  `
+fill: #803bec;
+width: 50px;
+height: 50px;
+`
+
+export const WatchListAddIcon = styled(WatchListAdd)
+  `
+fill:  black;
+width:50px;
+height:50px;
+`
+
+export const WatchListRemoveIcon = styled(WatchListRemove)
+  `
+fill: #803bec;
+width:50px;
+height:50px;
+`
+
+
+const StyledRating = styled(Rating)({
+  "& .MuiRating-iconFilled": {
+    color: "#f1ad00"
+  },
+  "& .MuiRating-iconHover": {
+    color: "#f1ad00"
+  },
+  "& .MuiRating-iconEmpty": {
+    color: "white"
+  }
+});
+
+const RatingBox = styled(Box)
+  `
+margin-top:3px;
+`

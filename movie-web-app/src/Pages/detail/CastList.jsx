@@ -15,7 +15,7 @@ const CastList = (props) => {
   useEffect(() => {
     const getCredits = async () => {
       const res = await tmdbApi.credits(category, props.id);
-      setCasts(res.cast.slice(0, 20));
+      setCasts(res.cast);
     };
     if (category != "actor") getCredits();
   }, [category, props.id]);
@@ -24,8 +24,8 @@ const CastList = (props) => {
       {casts.length > 0 && (
         <Swiper grabCursor={true} spaceBetween={8} slidesPerView={"auto"}>
           {casts.map((item, i) => (
-            <SwiperSlide>
-              <div key={i} className="casts__item">
+            <SwiperSlide key={i}>
+              <div  className="casts__item">
                 <Actor item={item} />
               </div>
             </SwiperSlide>

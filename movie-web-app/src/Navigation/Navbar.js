@@ -6,7 +6,7 @@ import Home from "../assets/home-solid.svg";
 import Team from "../assets/social.svg";
 import Calender from "../assets/sceduled.svg";
 import WatchListIcon from "../assets/WatchList.svg"
-import FavoriteIcon from "../assets/starred.svg"
+import FavoriteIcon from "../assets/FavoriteNavbar.svg"
 import Login from "../assets/login.svg"
 import Logout from "../assets/logout.svg"
 
@@ -107,6 +107,7 @@ const Item = styled(NavLink)`
   text-decoration: none;
   color: var(--white);
   width: 100%;
+  height: calc(24px + 2rem);
   padding: 1rem 0;
   cursor: pointer;
   display: flex;

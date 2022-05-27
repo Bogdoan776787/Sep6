@@ -11,7 +11,7 @@ def lambda_handler(event, context):
     status_code = 200
     body_params = event["queryStringParameters"]
     text_message="SUCCESS"
-    table = db.Table("Favorite")
+    table = db.Table("Favorites")
     table.delete_item(
         Key={
             "FavoriteId":body_params["favoriteId"]
