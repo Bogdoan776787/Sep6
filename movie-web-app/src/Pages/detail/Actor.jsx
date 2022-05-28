@@ -7,10 +7,8 @@ const Actor = (props) => {
   const item = props.item;
   const link = "/" + actor["actor"] + "/" + item.id;
   let img = null
-  if(item.profile_path!=null)
+  if(item.profile_path!==null)
     img = apiConfig.w500Image(item.profile_path);
-  
-  
   return (
     <Link to={link}>
       <div
