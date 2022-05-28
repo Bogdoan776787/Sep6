@@ -4,6 +4,8 @@
     padding: $header-height 0 2rem;
     text-align: center;
     margin-bottom: 2rem;
+    width:93%;
+    margin: 0 auto;
 
     position: relative;
 
@@ -14,6 +16,10 @@
     h2 {
         position: relative;
         z-index: 99;
+        text-align: center;
+        font-size: 40px;
+        color: #803bec;
+        margin-bottom: 20px;
     }
 
     &::after {
