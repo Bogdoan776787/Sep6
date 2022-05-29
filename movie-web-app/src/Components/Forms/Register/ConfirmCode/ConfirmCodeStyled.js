@@ -4,6 +4,8 @@ import { Typography } from "@mui/material";
 
 export const Form = styled.form`
     width:550px;
+    min-width:550px;
+    max-width: 700px;
     height:400px;
     display:flex;
     flex-direction:column;

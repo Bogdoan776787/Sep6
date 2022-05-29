@@ -9,8 +9,6 @@ import NoProfilePicture from "././../../assets/no-profile-picture.jpg";
 const CrewList = (props) => {
   const { category } = useParams();
   const [crews, setCrews] = useState([]);
-  const [index,setIndex] = useState(12);
-  const [showCrew,setShowCrew] = useState([]);
   useEffect(() => {
     const getCredits = async () => {
       const res = await tmdbApi.credits(category, props.id);

@@ -8,13 +8,13 @@ export const SubmitButton = styled.input`
     margin-top:20px;
     margin-bottom:20px;
     border-radius:15px;
-    background-color:rgba(137, 171, 245, 0.37);
+    background-color:#803bec;
     color:white;
     border:none;
     &:hover{
         background-color:white;
-        border:3px solid rgba(137, 171, 245, 0.37);
-        color:rgba(137, 171, 245, 0.37);
+        border:3px solid #803bec;
+        color:#803bec;
         padding:0;
     }
     `
