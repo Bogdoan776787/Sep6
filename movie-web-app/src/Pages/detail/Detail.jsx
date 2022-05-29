@@ -40,11 +40,6 @@ const Detail = () => {
   let user = useSelector(state => state.user)
   const [userReviewMovie, setUserReviewMovie] = useState({});
   const [item, setItem] = useState(null);
-  const scrollToElement = () => 
-
-  {
-    if(banner!==null)banner.current.scrollIntoView();
-  }
   const round = (num) => {
     var m = Number((Math.abs(num) * 100).toPrecision(15));
     return Math.round(m) / 100 * Math.sign(num);
@@ -58,7 +53,6 @@ const Detail = () => {
       setItem(response);
       setMovieRating(response.vote_average)
       getRating(response)
-      scrollToElement()
     };
     const getFavorite = async () => {
 
