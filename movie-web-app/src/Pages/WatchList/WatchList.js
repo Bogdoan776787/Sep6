@@ -1,5 +1,5 @@
 import MotionHoc from "./../MotionHoc";
-import WatchMovieCard from "./../../components/cards/WatchMovieCard";
+import WatchMovieCard from "./../../components/Cards/WatchMovieCard";
 import { WatchListBackground, WatchListHeaderText, WatchListCategory, WatchListTextWrapper,Loading,NotFoundText } from "./WatchListStyle"
 import { useEffect, useState } from "react";
 import serverApi from "./../../api/serverApi"

@@ -22,7 +22,7 @@ import { CircularProgress, Typography } from "@material-ui/core";
 import styled from "styled-components";
 import CrewList from "./CrewList";
 import ScrollableTabsButtonAuto from "./../../components/SrollableTabs/ScrollableTabsButton";
-import CommentTab from "../../components/commentTab/CommentTab";
+import CommentTab from "../../components/CommentTab/CommentTab";
 
 import { useSelector } from 'react-redux'
 
