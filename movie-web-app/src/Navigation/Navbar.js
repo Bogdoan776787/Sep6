@@ -3,23 +3,21 @@ import React, { useState } from "react";
 //All the svg files
 import logo from "../assets/logo.svg";
 import Home from "../assets/home-solid.svg";
-import Team from "../assets/social.svg";
-import Calender from "../assets/sceduled.svg";
-import WatchListIcon from "../assets/WatchList.svg"
-import FavoriteIcon from "../assets/FavoriteNavbar.svg"
-import Login from "../assets/login.svg"
-import Logout from "../assets/logout.svg"
+import Movies from "../assets/movies.svg";
+import TV from "../assets/tv3.svg";
+import WatchListIcon from "../assets/WatchList.svg";
+import FavoriteIcon from "../assets/FavoriteNavbar.svg";
+import Login from "../assets/login.svg";
+import Logout from "../assets/logout.svg";
 
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux'
-import { clearUser } from "./../userAccount"
-
-
+import { useSelector, useDispatch } from "react-redux";
+import { clearUser } from "./../userAccount";
 
 const Container = styled.div`
   position: fixed;
-  z-index: 10;
+  z-index: 12;
   .active {
     border-right: 4px solid var(--white);
     img {
@@ -207,17 +205,14 @@ const Text = styled.span`
 // `;
 
 const Navbar = () => {
-  let user = useSelector(state => state.user)
+  let user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
 
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const logOutUser = () => {
     dispatch(clearUser());
-  }
-
-
+  };
 
   return (
     <Container>
@@ -234,45 +229,38 @@ const Navbar = () => {
             <Text clicked={click}>Home</Text>
           </Item>
           <Item onClick={() => setClick(false)} to="/movie">
-            <img src={Team} alt="Team" />
-            <Text clicked={click}>Team</Text>
+            <img src={Movies} alt="Movies" />
+            <Text clicked={click}>Movies</Text>
           </Item>
           <Item onClick={() => setClick(false)} to="/tv">
-            <img src={Calender} alt="Calender" />
-            <Text clicked={click}>Calender</Text>
+            <img src={TV} alt="TV" />
+            <Text clicked={click}>TV Series</Text>
           </Item>
-          {user.data && <Item onClick={() => setClick(false)} to="/favorite">
-            <img src={FavoriteIcon} alt="Favorite" />
-            <Text clicked={click}>Favorite Shows</Text>
-          </Item>
-          }
-          {user.data && <Item
-            onClick={() => setClick(false)}
-            to="/watch-list"
-          >
-            <img src={WatchListIcon} alt="WatchList" />
-            <Text clicked={click}>Watch List</Text>
-          </Item>
-          }
-          {user.data == null && <Item
-            onClick={() => setClick(false)}
-            to="/login"
-          >
-            <img src={Login} alt="Log in" />
-            <Text clicked={click}>Log In</Text>
-          </Item>
-          }
-          {user.data &&
-            <Item
-              onClick={() => logOutUser()}
-              to="/login"
-            >
+          {user.data && (
+            <Item onClick={() => setClick(false)} to="/favorite">
+              <img src={FavoriteIcon} alt="Favorite" />
+              <Text clicked={click}>Favorite Shows</Text>
+            </Item>
+          )}
+          {user.data && (
+            <Item onClick={() => setClick(false)} to="/watch-list">
+              <img src={WatchListIcon} alt="WatchList" />
+              <Text clicked={click}>Watch List</Text>
+            </Item>
+          )}
+          {user.data == null && (
+            <Item onClick={() => setClick(false)} to="/login">
+              <img src={Login} alt="Log in" />
+              <Text clicked={click}>Log In</Text>
+            </Item>
+          )}
+          {user.data && (
+            <Item onClick={() => logOutUser()} to="/login">
               <img src={Logout} alt="Log out" />
               <Text clicked={click}>Log Out</Text>
             </Item>
-          }
+          )}
         </SlickBar>
-
       </SidebarContainer>
     </Container>
   );
