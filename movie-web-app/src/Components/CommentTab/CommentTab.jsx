@@ -20,7 +20,7 @@ const CommentTab = () => {
     }
     getCommentsForMovie();
 
-  }, [])
+  }, [category,id])
 
   return (
     <div>

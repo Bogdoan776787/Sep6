@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import SwiperCore, { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import Button, { OutlineButton } from "../button/Button";
+import { OutlineButton } from "../button/Button";
 import Modal, { ModalContent } from "../modal/Modal";
 
 import tmdbApi, { category, movieType } from "../../api/tmdbApi";
@@ -33,17 +33,6 @@ const HeroSlide = () => {
     };
     getMovies();
   }, []);
-
-  // useEffect(() => {
-  //   let timeout ;
-  //   if (Swiper !== null) {
-  //     timeout = setTimeout(() => Swiper.update(), 500)
-  //   }
-  //   return () => {
-  //     clearTimeout(timeout)
-  //   }
-  // },[Swiper])
-
 
   return (
     <div className="hero-slide">
@@ -76,11 +65,8 @@ const HeroSlide = () => {
 
 const HeroSlideItem = (props) => {
   
-  let navigate = useNavigate();
-
   const item = props.item;
   
-
   const background = apiConfig.originalImage(
     item.backdrop_path ? item.backdrop_path : item.poster_path
   );
@@ -130,11 +116,7 @@ const HeroSlideItem = (props) => {
 
 const TrailerModal = (props) => {
   const item = props.item;
-  const [modal, setModal] = useState(false);
   
-  const modalElement = document.querySelector(`#modal_${item.id}`);
-  
-
   const iframeRef = useRef(null);
   const close = () => {
     iframeRef.current.setAttribute("src", "")
@@ -156,7 +138,7 @@ const TrailerModal = (props) => {
 
 
   return (
-    <Modal active={modal} id={`modal_${item.id}`} onClose={close} >
+    <Modal active={false} id={`modal_${item.id}`} onClose={close} >
       <ModalContent >
         <iframe
           ref={iframeRef}

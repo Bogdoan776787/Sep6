@@ -1,7 +1,6 @@
 import FieldInputController from "../../Controller/FieldInputController";
 import { Form, RegisterHeaderText, InvalidInputText, RegisterRedirectLink } from "./RegisterFormStyled";
 import { SubmitButton, InputWrapper,TextRedirectHelper } from "../FormStyled"
-import { Typography } from "@mui/material";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';

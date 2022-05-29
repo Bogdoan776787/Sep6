@@ -52,7 +52,7 @@ const tmdbApi = {
     return axiosClient.get(url, { params: {} });
   },
   person: (person_id) => {
-    const url = "/person" + "/" + person_id;
+    const url = "/person/" + person_id;
 
     return axiosClient.get(url, { params: {} });
   },

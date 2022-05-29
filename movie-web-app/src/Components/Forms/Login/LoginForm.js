@@ -1,7 +1,6 @@
 import { Form, LoginHeaderText, LoginRedirectLink, LoginErrorMessage } from "./LoginFormStyled";
 import { SubmitButton, InputWrapper,TextRedirectHelper } from "../FormStyled"
 import FieldInputController from "../../Controller/FieldInputController";
-import { Typography } from "@mui/material"
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
