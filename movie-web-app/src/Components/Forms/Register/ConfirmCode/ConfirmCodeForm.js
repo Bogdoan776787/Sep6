@@ -1,4 +1,4 @@
-import FieldInputController from "./../../../Controller/FieldInputController";
+import FieldInputController from "../../../controller/FieldInputController";
 import { InvalidInputText } from "./../RegisterFormStyled";
 import {SubmitButton,InputWrapper} from "./../../FormStyled"
 import {Form,ConfirmCodeHeaderTExt,ResendCodeText,ConfirmCodeHelperText} from "./ConfirmCodeStyled"

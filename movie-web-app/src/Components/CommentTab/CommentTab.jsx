@@ -1,8 +1,8 @@
 import React, { useState,useEffect } from "react";
-import Comment from "./../Comment/Comment";
-import CommentsList from "./../CommentsList/CommentsList";
+import Comment from "../comment/Comment";
+import CommentsList from "../commentsList/CommentsList";
 import { useSelector } from 'react-redux'
-import serverApi from "./../../api/serverApi";
+import serverApi from "../../api/serverApi";
 import { useParams } from "react-router";
 
 const CommentTab = () => {
