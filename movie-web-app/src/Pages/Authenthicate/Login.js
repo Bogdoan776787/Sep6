@@ -1,5 +1,5 @@
 import { AuthenthicateBackground } from "./Style"
-import LoginForm from "../../Components/Forms/Login/LoginForm";
+import LoginForm from "../../components/Forms/Login/LoginForm";
 import { Auth } from "aws-amplify"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";

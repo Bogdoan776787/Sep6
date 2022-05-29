@@ -1,7 +1,7 @@
 import { Typography } from "@material-ui/core";
 import React, { useEffect,useState } from "react";
 import styled from "styled-components";
-import { OutlineButton } from "./../button/Button";
+import { OutlineButton } from "../button/Button";
 import { useParams } from "react-router";
 
 

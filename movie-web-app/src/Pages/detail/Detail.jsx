@@ -14,15 +14,15 @@ import { ReactComponent as WatchListRemove } from "../../assets/eye-minus.svg"
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 
-import MovieList from "../../Components/movie-list/MovieList";
+import MovieList from "../../components/movie-list/MovieList";
 import { ReactComponent as FavoriteAdd } from "../../assets/heart-add.svg"
 import { ReactComponent as FavoriteRemove } from "../../assets/heart-remove.svg"
 
 import { CircularProgress, Typography } from "@material-ui/core";
 import styled from "styled-components";
 import CrewList from "./CrewList";
-import ScrollableTabsButtonAuto from "../../Components/SrollableTabs/ScrollableTabsButton";
-import CommentTab from "./../../Components/CommentTab/CommentTab";
+import ScrollableTabsButtonAuto from "../../components/SrollableTabs/ScrollableTabsButton";
+import CommentTab from "../../components/CommentTab/CommentTab";
 
 import { useSelector } from 'react-redux'
 
