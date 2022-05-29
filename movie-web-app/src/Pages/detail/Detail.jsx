@@ -131,10 +131,11 @@ const Detail = () => {
     }
     else {
       if (userReviewMovie.ReviewId !== undefined)
-      await (serverApi.deleteReview(userReviewMovie.ReviewId))
+        await (serverApi.deleteReview(userReviewMovie.ReviewId))
       setRating(value)
       let res = await (serverApi.putReviewForMovie(localStorage.getItem("user"), id, category, value))
       setUserReviewMovie(res.data);
+      newValue = round((item.vote_average * item.vote_count + value) / (item.vote_count + 1))
     }
     item.vote_count = value === null ? item.vote_count - 1 : (rating === 0 ? item.vote_count + 1 : item.vote_count);
     setMovieRating(round(newValue));
