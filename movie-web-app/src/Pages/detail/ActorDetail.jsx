@@ -12,7 +12,7 @@ const ActorDetail = () => {
     const getActorDetail = async () => {
       const result = await tmdbApi.person(id);
       setItem(result);
-      console.log(result);
+      
     };
     getActorDetail();
   });

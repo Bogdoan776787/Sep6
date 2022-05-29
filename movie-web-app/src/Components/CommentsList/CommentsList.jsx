@@ -14,8 +14,8 @@ const Comment = (props) => {
 
     useEffect(()=>
     {   
-        console.log(index)
-        console.log(list)
+        
+        
         if(index >list.length && list.length>5)
             setIndex(list.length)
         else if(list.length>0 && 5<list.length)

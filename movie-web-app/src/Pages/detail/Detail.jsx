@@ -53,7 +53,8 @@ const Detail = () => {
       setItem(response);
       setMovieRating(response.vote_average)
       getRating(response)
-
+      
+      
       window.scrollTo(0, 0);
     };
     const getFavorite = async () => {
@@ -64,30 +65,51 @@ const Detail = () => {
       if (res.data[0] !== undefined) {
         setFavoriteData(res.data[0])
         setFavorite(true)
+        
+      }
+      else {
+        setFavoriteData({})
+        setFavorite(false)
       }
     }
 
     const getWatchMovie = async () => {
 
       let res = await serverApi.getOneFromWatchList(localStorage.getItem("user"), id, category)
+      
       if (res.data[0] !== undefined) {
         setWatchData(res.data[0])
         setWatched(true)
+
+        
+
+      }
+      else {
+        setWatchData({})
+        setWatched(false)
       }
     }
 
     const getRating = async (data) => {
       let res = await serverApi.getReviewForMovieByUser(localStorage.getItem("user"), id, category)
+      let sum = 0;
+      let reviews = [];
+
       if (res.data.userReview.length > 0) {
         setUserReviewMovie(res.data.userReview[0])
         setRating(parseInt(res.data.userReview[0].MovieRating))
-        let reviews = res.data.Reviews;
-        let sum = 0;
+        reviews = res.data.Reviews;
+
         reviews.forEach(review => {
           sum += parseInt(review.MovieRating)
         })
         setMovieRating(round((data.vote_average * data.vote_count + sum) / (data.vote_count + reviews.length)))
         data.vote_count += reviews.length;
+      }
+      else {
+        setUserReviewMovie({})
+        setRating(0)
+        setMovieRating(data.vote_average)
       }
     }
 
@@ -95,21 +117,21 @@ const Detail = () => {
       getFavorite();
       getDetail();
       getWatchMovie();
+      
     }
-  }, [category, id, favorite.length]);
+  },[category,id]);
 
   const sendRating = async (value) => {
     let newValue = item.vote_average
 
     if (value === null) {
-
       await (serverApi.deleteReview(userReviewMovie.ReviewId))
       setRating(0);
       setUserReviewMovie({})
     }
     else {
       if (userReviewMovie.ReviewId !== undefined)
-        await (serverApi.deleteReview(userReviewMovie.ReviewId))
+      await (serverApi.deleteReview(userReviewMovie.ReviewId))
       setRating(value)
       let res = await (serverApi.putReviewForMovie(localStorage.getItem("user"), id, category, value))
       setUserReviewMovie(res.data);

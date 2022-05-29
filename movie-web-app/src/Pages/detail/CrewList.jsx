@@ -12,11 +12,11 @@ const CrewList = (props) => {
   useEffect(() => {
     const getCredits = async () => {
       const res = await tmdbApi.credits(category, props.id);
-      console.log(res.crew)
+      
       let crew = res.crew.filter((item,index) => index!==0 && item.id!==res.crew[index-1].id);
       setCrews(crew);
 
-      console.log(res.crew)
+      
     };
     if (category != "crew") getCredits();
   }, [category, props.id]);
