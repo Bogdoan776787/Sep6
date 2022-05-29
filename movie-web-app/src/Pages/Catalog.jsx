@@ -2,10 +2,10 @@ import React from 'react';
 
 import { useParams } from 'react-router';
 
-import PageHeader from '../Components/page-header/PageHeader';
+import PageHeader from './../Components/page-header/PageHeader';
 
-import { category as cate } from '../api/tmdbApi';
-import MovieGrid from '../Components/movie-grid/MovieGrid';
+import { category as cate } from './../api/tmdbApi';
+import MovieGrid from './../Components/movie-grid/MovieGrid';
 
 const Catalog = () => {
 
