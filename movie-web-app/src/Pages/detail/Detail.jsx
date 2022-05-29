@@ -118,7 +118,8 @@ const Detail = () => {
       getWatchMovie();
       
     }
-    window.scrollTo(0, 0);
+    if(banner!==null)
+      window.scrollTo(0, 0);
   },[category,id]);
 
   const sendRating = async (value) => {
