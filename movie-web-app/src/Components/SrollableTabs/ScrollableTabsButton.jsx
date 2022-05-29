@@ -1,4 +1,4 @@
-import TabPanel from "../TabPanel/TabPanel";
+import TabPanel from "./../TabPanel/TabPanel";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";

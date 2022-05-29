@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 import { useParams } from "react-router";
 
-import tmdbApi from "../../api/tmdbApi";
+import tmdbApi from "./../../api/tmdbApi";
 
 const VideoList = (props) => {
   const { category,id } = useParams();

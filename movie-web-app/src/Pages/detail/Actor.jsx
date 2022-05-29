@@ -1,6 +1,6 @@
 import React from "react";
-import apiConfig from "../../api/apiConfig";
-import { actor } from "../../api/tmdbApi";
+import apiConfig from "./../../api/apiConfig";
+import { actor } from "./../../api/tmdbApi";
 import { Link } from "react-router-dom";
 import NoProfilePicture from "././../../assets/no-profile-picture.jpg";
 const Actor = (props) => {

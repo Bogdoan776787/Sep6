@@ -3,11 +3,11 @@ import React, { useState, useEffect, useRef,useCallback } from "react";
 import SwiperCore, { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { OutlineButton } from "../button/Button";
-import Modal, { ModalContent } from "../modal/Modal";
+import { OutlineButton } from "./../button/Button";
+import Modal, { ModalContent } from "./../modal/Modal";
 
-import tmdbApi, { category, movieType } from "../../api/tmdbApi";
-import apiConfig from "../../api/apiConfig";
+import tmdbApi, { category, movieType } from "./../../api/tmdbApi";
+import apiConfig from "./../../api/apiConfig";
 
 import "./hero-slide.scss";
 

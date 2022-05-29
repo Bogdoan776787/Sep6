@@ -5,8 +5,8 @@ import { CircularProgress } from "@material-ui/core";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import { category } from "../../api/tmdbApi";
-import apiConfig from "../../api/apiConfig";
+import { category } from "./../../api/tmdbApi";
+import apiConfig from "./../../api/apiConfig";
 
 const MovieCard = (props) => {
   const item = props.item;

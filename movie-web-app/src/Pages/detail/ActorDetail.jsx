@@ -2,8 +2,8 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import tmdbApi from "../../api/tmdbApi";
-import apiConfig from "../../api/apiConfig";
+import tmdbApi from "./../../api/tmdbApi";
+import apiConfig from "./../../api/apiConfig";
 import styled from "styled-components";
 const ActorDetail = () => {
   const [item, setItem] = useState(null);

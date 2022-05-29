@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { useParams } from "react-router";
 
-import tmdbApi from "../../api/tmdbApi";
+import tmdbApi from "./../../api/tmdbApi";
 
 import Actor from "./Actor";
 

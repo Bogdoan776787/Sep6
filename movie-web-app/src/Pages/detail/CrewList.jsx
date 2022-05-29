@@ -4,9 +4,9 @@ import { useParams } from "react-router";
 import { Typography } from "@material-ui/core";
 
 
-import tmdbApi from "../../api/tmdbApi";
-import apiConfig from "../../api/apiConfig";
-import NoProfilePicture from "././../../assets/no-profile-picture.jpg";
+import tmdbApi from "./../../api/tmdbApi";
+import apiConfig from "./../../api/apiConfig";
+import NoProfilePicture from "./../../assets/no-profile-picture.jpg";
 
 const CrewList = (props) => {
   const { category } = useParams();

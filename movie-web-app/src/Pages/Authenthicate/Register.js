@@ -1,10 +1,8 @@
 import { useState } from "react"
 
 import { AuthenthicateBackground } from "./Style"
-import RegisterForm from "../../components/Forms/Register/RegisterForm";
-import ConfirmCodeForm from "../../components/Forms/Register/ConfirmCode/ConfirmCodeForm";
-// import { yupResolver } from "@hookform/resolvers/yup";
-// import * as yup from "yup";
+import RegisterForm from "./../../components/Forms/Register/RegisterForm";
+import ConfirmCodeForm from "./../../components/Forms/Register/ConfirmCode/ConfirmCodeForm";
 import { Auth } from "aws-amplify"
 import { useNavigate } from "react-router-dom";
 

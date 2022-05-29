@@ -5,9 +5,9 @@ import "./movie-list.scss";
 
 import { SwiperSlide, Swiper } from "swiper/react";
 
-import tmdbApi, { category } from "../../api/tmdbApi";
+import tmdbApi, { category } from "./../../api/tmdbApi";
 
-import MovieCard from "../movie-card/MovieCard";
+import MovieCard from "./../movie-card/MovieCard";
 
 const MovieList = (props) => {
   const [items, setItems] = useState([]);

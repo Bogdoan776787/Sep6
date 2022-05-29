@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
 //All the svg files
-import logo from "../assets/logo.svg";
-import Home from "../assets/home-solid.svg";
-import Movies from "../assets/movies.svg";
-import TV from "../assets/tv3.svg";
-import WatchListIcon from "../assets/WatchList.svg";
-import FavoriteIcon from "../assets/FavoriteNavbar.svg";
-import Login from "../assets/login.svg";
-import Logout from "../assets/logout.svg";
+import logo from "./../assets/logo.svg";
+import Home from "./../assets/home-solid.svg";
+import Movies from "./../assets/movies.svg";
+import TV from "./../assets/tv3.svg";
+import WatchListIcon from "./../assets/WatchList.svg";
+import FavoriteIcon from "./../assets/FavoriteNavbar.svg";
+import Login from "./../assets/login.svg";
+import Logout from "./../assets/logout.svg";
 
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";

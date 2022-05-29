@@ -3,11 +3,11 @@ import { useParams } from "react-router";
 
 import "./movie-grid.scss";
 
-import MovieCard from "../movie-card/MovieCard";
-import Button, { OutlineButton } from "../button/Button";
-import Input from "../input/Input";
+import MovieCard from "./../movie-card/MovieCard";
+import Button, { OutlineButton } from "./../button/Button";
+import Input from "./../input/Input";
 
-import tmdbApi, { category, movieType, tvType } from "../../api/tmdbApi";
+import tmdbApi, { category, movieType, tvType } from "./../../api/tmdbApi";
 import { useNavigate } from "react-router-dom";
 
 const MovieGrid = (props) => {

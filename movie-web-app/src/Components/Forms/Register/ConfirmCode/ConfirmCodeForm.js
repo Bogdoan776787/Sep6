@@ -1,6 +1,6 @@
-import FieldInputController from "../../../Controller/FieldInputController";
-import { InvalidInputText } from "../RegisterFormStyled";
-import {SubmitButton,InputWrapper} from "../../FormStyled"
+import FieldInputController from "./../../../Controller/FieldInputController";
+import { InvalidInputText } from "./../RegisterFormStyled";
+import {SubmitButton,InputWrapper} from "./../../FormStyled"
 import {Form,ConfirmCodeHeaderTExt,ResendCodeText,ConfirmCodeHelperText} from "./ConfirmCodeStyled"
 
 import { useForm } from "react-hook-form";

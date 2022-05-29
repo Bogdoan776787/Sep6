@@ -1,8 +1,8 @@
-import MotionHoc from "../MotionHoc";
-import FavoriteMovieCard from "../../components/Cards/FavoriteMovieCard";
+import MotionHoc from "./../MotionHoc";
+import FavoriteMovieCard from "./../../components/Cards/FavoriteMovieCard";
 import { FavoriteBackground, FavoriteHeaderText, FavoriteCategory, FavoriteTextWrapper,Loading,NotFoundText } from "./FavoriteListStyle"
 import { useEffect, useState } from "react";
-import serverApi from "../../api/serverApi"
+import serverApi from "./../../api/serverApi"
 
 
 const FavoriteListComponent = () => {
