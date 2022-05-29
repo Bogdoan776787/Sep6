@@ -41,7 +41,6 @@ const  ScrollableTabsButtonAuto = ({Trailer,Casts,Crew,Comments,Ratings,Others})
             <MovieTab label="Casts" {...a11yProps(1)} />
             <MovieTab label="Crew" {...a11yProps(2)} />
             <MovieTab label="Comments" {...a11yProps(3)} />
-            <MovieTab label="Others" {...a11yProps(4)} />
           </MovieTabs>
         </AppBar>
         <TabPanel value={value} index={0}>
@@ -55,9 +54,6 @@ const  ScrollableTabsButtonAuto = ({Trailer,Casts,Crew,Comments,Ratings,Others})
         </TabPanel>
         <TabPanel value={value} index={3}>
           {Comments}
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          Others
         </TabPanel>
       </div>
     );

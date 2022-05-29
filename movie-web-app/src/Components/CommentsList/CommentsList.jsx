@@ -22,7 +22,7 @@ const Comment = (props) => {
             setIndex(5)
         let comments = list.slice(0,index)
         setComments(comments)
-    },[props.list])
+    },[props.list,index,list])
     const handleClick = (value) =>
     {
         

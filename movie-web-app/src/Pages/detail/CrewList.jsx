@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 import { useParams } from "react-router";
+import { Typography } from "@material-ui/core";
+
 
 import tmdbApi from "../../api/tmdbApi";
 import apiConfig from "../../api/apiConfig";
@@ -18,7 +20,7 @@ const CrewList = (props) => {
 
       
     };
-    if (category != "crew") getCredits();
+    if (category !== "crew") getCredits();
   }, [category, props.id]);
 
   return (
@@ -41,6 +43,8 @@ const CrewList = (props) => {
         </div>
         
       )}
+            {crews.length === 0 && <Typography variant="h5">No crew data available for this {category === "movie" ? "movie" : "TV show"}</Typography>}
+
     </div>
   );
 };

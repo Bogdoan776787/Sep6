@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
 
 import tmdbApi from "../../api/tmdbApi";
@@ -35,11 +35,12 @@ const Detail = () => {
 
   const [watched, setWatched] = useState(false);
   const [watchData, setWatchData] = useState({});
+  const banner = useRef(null)
 
   let user = useSelector(state => state.user)
   const [userReviewMovie, setUserReviewMovie] = useState({});
   const [item, setItem] = useState(null);
-
+  const scrollToElement = () => banner.current.scrollIntoView();
   const round = (num) => {
     var m = Number((Math.abs(num) * 100).toPrecision(15));
     return Math.round(m) / 100 * Math.sign(num);
@@ -53,9 +54,7 @@ const Detail = () => {
       setItem(response);
       setMovieRating(response.vote_average)
       getRating(response)
-      
-      
-      window.scrollTo(0, 0);
+      scrollToElement()
     };
     const getFavorite = async () => {
 
@@ -119,6 +118,7 @@ const Detail = () => {
       getWatchMovie();
       
     }
+    window.scrollTo(0, 0);
   },[category,id]);
 
   const sendRating = async (value) => {
@@ -176,6 +176,7 @@ const Detail = () => {
         <>
           <div
             className="banner"
+            ref={banner}
             style={{
               backgroundImage: `url(${apiConfig.originalImage(
                 item.backdrop_path || item.poster_path
