@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef,useCallback } from "react";
 
 import SwiperCore, { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -117,10 +117,10 @@ const TrailerModal = (props) => {
   const item = props.item;
   
   const iframeRef = useRef(null);
-  const close = () => {
+  const close = useCallback(() => {
     iframeRef.current.setAttribute("src", "")
     document.getElementById(`modal_${item.id}`).classList.remove("active");
-  };
+  },[]);
   useEffect(() => {
 
     const handleClickOutside = (event) => {

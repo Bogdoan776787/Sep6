@@ -13,7 +13,7 @@ const Modal = props => {
     }, [props.active]);
 
     return (
-        <div id={props.id} className={`modal ${props.active ? 'active' : ''}`}>
+        <div id={props.id} className={`modal ${active ? 'active' : ''}`}>
             {props.children}
         </div>
     );

@@ -6,7 +6,7 @@ import { useParams } from "react-router";
 
 
 const Comment = (props) => {
-    const { category,id } = useParams();
+    const { category } = useParams();
 
     const [index,setIndex] = useState(5);
     const [comments,setComments] = useState([]);

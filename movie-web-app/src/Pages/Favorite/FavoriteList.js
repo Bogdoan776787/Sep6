@@ -49,7 +49,7 @@ const FavoriteListComponent = () => {
       ))
     }
     {
-      currentShows.length === 0 && responseStatus == 0 &&
+      currentShows.length === 0 && responseStatus === 0 &&
       <Loading
       type="spinningBubbles"
       color="#803bec"
