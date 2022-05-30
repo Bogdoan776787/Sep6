@@ -9,23 +9,21 @@ db = boto3.resource('dynamodb')
 
 def lambda_handler(event, context):
     
-    status_code = 200
-    text_message="SUCCESS"
+    STATUS_CODE = 200
 
     #calling tmdb in order to extract rating
-    api_external_key = "2bc24570068939f0e5e7d4182262a186"
-    url = "https://api.themoviedb.org/3/TYPE/MOVIE_ID?api_key="+ api_external_key+ "&language=en-US"
+    API_EXTERNAL_KEY = "2bc24570068939f0e5e7d4182262a186"
+    API_EXTERNAL_URL = "https://api.themoviedb.org/3/TYPE/MOVIE_ID?api_key="+ API_EXTERNAL_KEY+ "&language=en-US"
     query_params = event["queryStringParameters"]
     if("movieId" in query_params.keys()):
-        response = getMovieFromWatchListTable(query_params["userId"],query_params["movieId"],query_params["type"])
-        print(response)
+        response = getMovieFavoriteTable(query_params["userId"],query_params["movieId"],query_params["type"])
         items =response
     else:
-        items = getWatchListTable(query_params["userId"])
+        items = getFavoriteTable(query_params["userId"])
 
         #get reviews and add review to the item data
         for item in items:
-            movieUrl = url.replace("MOVIE_ID", item["movieId"])
+            movieUrl = API_EXTERNAL_URL.replace("MOVIE_ID", item["movieId"])
             movieUrl = movieUrl.replace("TYPE", item["type"])
             movieTitleTag = "title" if item["type"] == "movie"  else "name"
             releaseDate = "release_date" if item["type"] == "movie"  else "first_air_date"
@@ -37,7 +35,7 @@ def lambda_handler(event, context):
             item["movieReleaseData"] = resp[releaseDate]
 
     return {
-        "statusCode": status_code,
+        "statusCode": STATUS_CODE,
         "headers": {
             "Access-Control-Allow-Headers" : "Content-Type",
             "Access-Control-Allow-Origin": "*", 
@@ -47,7 +45,7 @@ def lambda_handler(event, context):
     }
 
 
-def getWatchListTable(userId):
+def getFavoriteTable(userId):
     table = db.Table("Favorites")
     response = table.scan(
     FilterExpression=Attr('userId').eq(userId)
@@ -55,7 +53,7 @@ def getWatchListTable(userId):
     return response["Items"]
     
 
-def getMovieFromWatchListTable(userId,movieId,movieType):
+def getMovieFavoriteTable(userId,movieId,movieType):
     table = db.Table("Favorites")
     response = table.scan(
         FilterExpression=Attr('userId').eq(userId) & Attr('movieId').eq(movieId) & Attr('type').eq(movieType)
