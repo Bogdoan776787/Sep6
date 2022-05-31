@@ -8,8 +8,7 @@ db = boto3.resource('dynamodb')
 
 
 def lambda_handler(event, context):
-    status_code = 200
-    text_message="SUCCESS"
+    STATUS_CODE = 200
     query_params = event["queryStringParameters"]
     items = dict()
     items["Reviews"] = getReviews(query_params["movieId"],query_params["type"])
@@ -18,7 +17,7 @@ def lambda_handler(event, context):
             items["userReview"] = response;
     print(items)
     return {
-        "statusCode": status_code,
+        "statusCode": STATUS_CODE,
         "headers": {
             "Access-Control-Allow-Headers" : "Content-Type",
             "Access-Control-Allow-Origin": "*", 

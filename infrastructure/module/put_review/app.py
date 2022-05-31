@@ -12,7 +12,7 @@ def lambda_handler(event, context):
     dt_iso = str(datetime.now().isoformat())
     #Generate Random ID
     id_db=uuid.uuid4()
-    status_code = 200
+    STATUS_CODE = 200
     body_params = json.loads(event["body"])
     text_message="SUCCESS"
     rating = body_params["movieRating"]
@@ -34,7 +34,7 @@ def lambda_handler(event, context):
     )
 
     return {
-        "statusCode": status_code,
+        "statusCode": STATUS_CODE,
         "headers": {
             "Access-Control-Allow-Headers" : "Content-Type",
             "Access-Control-Allow-Origin": "*", 
