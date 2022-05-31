@@ -30,7 +30,7 @@ jobs:
       # Make it use Python
       - uses: actions/setup-python@v3
         with:
-          python-version: "3.8"
+          python-version: "3.9"
           
       # Setting up SAM
       - uses: aws-actions/setup-sam@v2
